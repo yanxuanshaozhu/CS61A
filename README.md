@@ -27,4 +27,4 @@ CS61A
 
 `lab`: this folder contains all labs with my solutions.
 
-`note`: this folder contains a markdown file with some notes that I find useful for lecture materials, homework, labs. Maybe in the future I will upload my detailed hand-written notes in a pdf file or I will reproduce the detailed notes in a markdown file.
+`note`: this folder contains a markdown file with some notes that I find useful for lecture materials, homework and labs. Maybe in the future I will upload my detailed hand-written notes in a pdf file or I will reproduce the detailed notes in a markdown file.
