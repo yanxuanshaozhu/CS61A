@@ -154,3 +154,25 @@ Common Error Types: SyntaxError, IndentationError, TypeError, ZeroDivisionError,
 <br>
 
 Common Bugs: spelling, missing parentheses, missing close quotes, == v.s. =, infinite loops, off-by-one errors(boundary condition error)
+
+
+
+# Lecture 4
+
+```python
+>>> (lambda f,g: lambda x: f(g(x)))(lambda x: x ** 2, lambda y: y + 1)(12)
+169
+#The above code is equal to the following ones:
+>>>def func1(f,g):
+    	def func2(x):
+            return f(g(x))
+        return func2
+    def f(x):
+        return x ** 2
+    def g(x):
+        return x + 1
+    myfunc = func1(f, g)
+    myfunc(12)
+169
+```
+
