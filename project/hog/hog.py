@@ -358,6 +358,15 @@ def make_averaged(original_function, trials_count=1000):
     """
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
+
+    def average(*args):
+        rs = 0
+        for i in range(trials_count):
+            rs += original_function(*args)
+        return rs / trials_count
+
+    return average
+
     # END PROBLEM 8
 
 
@@ -372,6 +381,16 @@ def max_scoring_num_rolls(dice=six_sided, trials_count=1000):
     """
     # BEGIN PROBLEM 9
     "*** YOUR CODE HERE ***"
+    ls = []
+    for i in range(1, 11):
+        returns = make_averaged(roll_dice, trials_count)
+        ls.append((returns(i, dice), i))
+        ls.sort(key=lambda x: x[0], reverse=True)
+        rs = []
+        for ele in ls:
+            if ele[0] == ls[0][0]:
+                rs.append(ele[1])
+    return min(rs)
     # END PROBLEM 9
 
 
@@ -420,7 +439,10 @@ def bacon_strategy(score, opponent_score, cutoff=8, num_rolls=6):
     rolls NUM_ROLLS otherwise.
     """
     # BEGIN PROBLEM 10
-    return 6  # Replace this statement
+    if free_bacon(opponent_score) >= cutoff:
+        return 0
+    else:
+        return num_rolls
     # END PROBLEM 10
 
 
@@ -430,7 +452,10 @@ def extra_turn_strategy(score, opponent_score, cutoff=8, num_rolls=6):
     Otherwise, it rolls NUM_ROLLS.
     """
     # BEGIN PROBLEM 11
-    return 6  # Replace this statement
+    if extra_turn(score + free_bacon(opponent_score), opponent_score):
+        return 0
+    else:
+        return bacon_strategy(score, opponent_score, cutoff, num_rolls)
     # END PROBLEM 11
 
 
@@ -440,7 +465,7 @@ def final_strategy(score, opponent_score):
     *** YOUR DESCRIPTION HERE ***
     """
     # BEGIN PROBLEM 12
-    return 6  # Replace this statement
+    return extra_turn_strategy(score, opponent_score, cutoff=8, num_rolls=6)
     # END PROBLEM 12
 
 
