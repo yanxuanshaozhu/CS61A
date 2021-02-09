@@ -1,5 +1,5 @@
 # CS61A
-My learning materials for the UCB course  CS61A 2018 fall.
+My learning materials for the UCB course  CS61A 2020 fall.
 
 <br>
 

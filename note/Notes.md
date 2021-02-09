@@ -1,4 +1,4 @@
-# ecture 1
+# Lecture 1
 
 The Zen of Python:
 
@@ -78,7 +78,7 @@ python ok --local # test for the whole Python file.
 python ok -q question_name -u # unlock the question, if you add --local, it will fail. In this situation, I use the 2020 fall homework instead
 ```
 
-Notice: only the latest version(currently the ok for Spring 2020 fall class and Spring 2021 class) of ok can be working without the `--local` parameter. If you use an older version of ok python without `--local`, it will display `checking for software updates` and stuck at there.  
+Notice: only the latest version(currently the ok for 2020 Fall class and 2021 Spring class) of ok can be working without the `--local` parameter. If you use an older version of ok python without `--local`, it will display `checking for software updates` and stuck at there.  
 
 
 
@@ -310,4 +310,32 @@ fn: <fun_name>   --------------------> func <fun_name>(<formal_parameters>)[pare
     <li>bind &lt formal-parameters &gt to arguments in the local frame</li>
     <li>execute the body of the function in the environment that starts with the local frame</li>
 </ol>
+
+
+# Lecture 6
+
+Self-reference: a function that refers to itself in the function body is called self-reference
+
+
+
+# Lecture 7
+
+Recursive function: can be divided into a base case and recursive function calls
+
+<br>
+
+Mutual recursion:  if a recursive procedure can be divided into two functions that call each other, then the two functions are mutual recursive.
+
+The mutual recursive functions can be rewritten into a single recursive function. Say if you use two functions to represent the even and odd cases respectively, you can then replace them using one function that uses a step of two.
+
+<br>
+
+Tree recursion: a function calls itself multiple times in the function body
+
+```python
+# An example: let par(n, m) be the function that calculates the number of differentt partitions of an integer n, requiring each fraction no greater than m
+# In such a case we must have par(n, m) = par(n - m, m) + par(n, m - 1). par(n - m, m) represents the partitions that use m as a fraction while par(n, m - 1) represents the remaining partitions
+```
+
+
 
