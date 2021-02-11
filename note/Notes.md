@@ -337,5 +337,62 @@ Tree recursion: a function calls itself multiple times in the function body
 # In such a case we must have par(n, m) = par(n - m, m) + par(n, m - 1). par(n - m, m) represents the partitions that use m as a fraction while par(n, m - 1) represents the remaining partitions
 ```
 
+<br>
+
+The Luhn algorithm: used for the credit card number checker. 
+
+The credit card number consists of two parts: the ordinary digits and the check digit at last. For example,if the account number is "7992739871" and the check number is X, then the full account number is "7992739871X". The Luhn algorithm is used to calculate what the number X is.
+
+Steps of Luhn Algorithm:
+
+1. Starting from the rightmost digit(the check digit) and moving left, double the value of every second digit; if the result of doubling operation is greater than 9, then sum the digits of the result(e.g., 6 * 2 = 12 > 9, then replace 12 with 1 + 2 = 3 )
+
+2. Add the resulting numbers in each place, denote it as sum_results, then the check digit can be calculated in the following ways:
+
+    ​                                                                                                  $$ check\_digit = (10 - (sum\_results \quad mod \quad 10) \quad mod \quad 10)$$
+
+For the above example, the sum_results = 1 * 2 + 7 + 7( 8 * 2 => 7) + 9 + 3 * 2 + 7 + 2 * 2 + 9 + 9( 9 * 2 => 9) + 7 = 67. Then check_digit =  (10 - 67 % 10) % 10 = 3. So the full credit card number is "7992739871X".
+
+A simple way to verify whether the check_digit is correct:  if `(sum_results + check_digit) % 10 == 0`, then the check_digit is correct.
 
 
+
+# Lecture 8
+
+Functional abstractions: concrete implementations do not matter in this situation.
+
+<br>
+
+Choosing names:
+
+<ul>
+    <li> Names should convey the meaning or purpose of the values to which they're bound</li>
+    <li> The type of values bound to the name is best documented in the docstring of the function</li>
+    <li> Names can be long if they help to document your code</li>
+    <li> Names can be short if they represent generic quantities</li>
+</ul>
+
+<br>
+
+Test-driven development:
+
+<ul> 
+    <li> Write test for functions before you actually implementing the function itself</li>
+    <li> Develop incrementally and test each piece before moving on</li>
+    <li> Run your code interactively</li>    
+
+
+
+# Lecture 9
+
+Different ways to implementations recursive functions:
+
+<ul>
+    <li> If multiple implementations of a function are equally clear, then you should choose the shorter one </li>
+    <li> If the longer one is more clear, then you should use it</li>
+    <li> Sometimes the base case is omitted so the function implementations are shorter, however, the function is still recursive in these cases</li>
+</ul>
+
+<br>
+
+If you store every intermediate value during the recursion process, then it is pretty slow compared with Iteration.
