@@ -1,4 +1,4 @@
-# Lecture 1
+# Lecture 01
 
 The Zen of Python:
 
@@ -20,7 +20,7 @@ words = file.read().decode().split()
 
 
 
-# Lecture 2
+# Lecture 02
 
 The intrinsic name and the bound name of a function:
 
@@ -82,7 +82,7 @@ Notice: only the latest version(currently the ok for 2020 Fall class and 2021 Sp
 
 
 
-# HW 1
+# HW 01
 
 Answer for the Quine question:
 
@@ -96,7 +96,7 @@ The built-in `repr` function, which returns an expression that evaluates to its 
 
 
 
-# Lecture 3
+# Lecture 03
 
 If not short-circuiting, `and` and `or` Boolean operator returns the last expression they evaluate.
 
@@ -157,7 +157,7 @@ Common Bugs: spelling, missing parentheses, missing close quotes, == v.s. =, inf
 
 
 
-# Lecture 4
+# Lecture 04
 
 Notice the following tuple assignment:
 
@@ -261,7 +261,7 @@ def df1(x, n):
 
 
 
-# Project Hog
+# Project 01 Hog
 
 ```python
 randint(a,b) # a <= x <= b
@@ -292,7 +292,7 @@ print(min(rs))
 
 
 
-# Lecture 5
+# Lecture 05
 
 How to draw an environment diagram:
 
@@ -312,13 +312,13 @@ fn: <fun_name>   --------------------> func <fun_name>(<formal_parameters>)[pare
 </ol>
 
 
-# Lecture 6
+# Lecture 06
 
 Self-reference: a function that refers to itself in the function body is called self-reference
 
 
 
-# Lecture 7
+# Lecture 07
 
 Recursive function: can be divided into a base case and recursive function calls
 
@@ -357,7 +357,7 @@ A simple way to verify whether the check_digit is correct:  if `(sum_results + c
 
 
 
-# Lecture 8
+# Lecture 08
 
 Functional abstractions: concrete implementations do not matter in this situation.
 
@@ -380,10 +380,10 @@ Test-driven development:
     <li> Write test for functions before you actually implementing the function itself</li>
     <li> Develop incrementally and test each piece before moving on</li>
     <li> Run your code interactively</li>    
+</ul>
 
 
-
-# Lecture 9
+# Lecture 09
 
 Different ways to implementations recursive functions:
 
@@ -396,3 +396,25 @@ Different ways to implementations recursive functions:
 <br>
 
 If you store every intermediate value during the recursion process, then it is pretty slow compared with Iteration.
+
+
+
+# HW 02
+
+This one is quite hard for me, I spent a long time converting iteration to recursion for the ping pong question and the count coins question. At first there were duplicate results in my recursion formula and I checked for a while, also I turned to the hint videos on the website for inspiration.  I learnt several lessons from these two problems:
+
+<ol>
+    <li>If you want to preserve several variables through the recursion process, define a helper function with all needed variables as arguments inside the target function.</li>
+    <li>If counting from the largest number doesn't work, then try starting from the smallest one.</li>
+    <li>A forluma: term(n, m) = term(n - m, m) + term(n, fun(m))</li>
+</ol>
+
+<br>
+
+The recursive lambda:
+
+```python
+lambda func: lambda args: func(func,args)             # This is a general form for recursive lambda, the func is a two-argument recursive function
+(lambda func: lambda args: func(func,args))(lambda f, x: x * f(f, x - 1))(n) # This calculate the factorial(n)
+```
+
