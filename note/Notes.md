@@ -418,3 +418,158 @@ lambda func: lambda args: func(func,args)             # This is a general form f
 (lambda func: lambda args: func(func,args))(lambda f, x: x * f(f, x - 1))(n) # This calculate the factorial(n)
 ```
 
+
+
+# Lecture 10
+
+Each value in Python has a class that determines the type of the value, values share class and behavior.
+
+<br>
+
+Native data types:
+
+* Properties:
+    * literals: expressions that evaluate to values of native data types
+    * functions and operations to manipulate values of native data types
+* Categories:
+    * numeric types: int (integers), float (real numbers), complex (complex numbers)
+    * no-numeric types: bool (True / False), the majority of no-numeric data types cannot be described in native data types
+
+<br>
+
+Data abstraction: separate segments of programs that deal with how data are represented from segments of programs that deal with how data are manipulated
+
+Function abstraction: separate how function is implemented and how function is used
+
+<br>
+
+Abstraction barrier: lower-layer functions are invisible to function users, they only access higher-layer functions, the higher-layer functions can interact with the lower-layer functions. In such a way, how data is actually implemented, how lower-layer function is defined (like selector/ constructor  e.g., get/set, constructor in Java) don't affect the behavior of the data types/ functions.
+
+
+
+# Lecture 11
+
+Sequence: an ordered collection of values, there are different types of sequences, but they share common behaviors.
+
+* Properties: finite length, an empty sequence has 0 length
+* Indexing: starting from 0
+* list is a type of sequence, string is a type of sequence, range is a type of sequence
+
+```python
+for _ in range(n)  # use underscore instead of index like i
+
+
+def map_list(func, ls):
+    return [func(ele) for ele in ls]
+
+map_list = lambda func,ls: list(map(func, ls))
+
+def subset_list(func, ls):
+    return [ele for ele in ls if func(ele)]
+
+subset_list = lambda func, ls: list(filter(func, ls))
+
+def reduce_list(func, ls, initial):
+    reduced = initial
+    for ele in ls:
+        reduced  = func(reduced, ele)
+    return reduced
+
+from functools import reduce
+reduce_list = reduce(func, ls)  # The initial value for reduce function can be omitted
+```
+
+
+
+# Lab 04
+
+I stuck at question 5 for some time, so I put the question here:
+
+A subsequence of a number is a series of (not necessarily contiguous) digits of the number. For example, 12345 has subsequences that include 123, 234, 124, 245, etc. Your task is to get the maximum subsequence below a certain length.
+
+```python
+def max_subseq(n, t):
+    """
+    Return the maximum subsequence of length at most t that can be found in the given number n.
+    For example, for n = 20125 and t = 3, we have that the subsequences are
+        2
+        0
+        1
+        2
+        5
+        20
+        21
+        22
+        25
+        01
+        02
+        05
+        12
+        15
+        25
+        201
+        202
+        205
+        212
+        215
+        225
+        012
+        015
+        025
+        125
+    and of these, the maxumum number is 225, so our answer is 225.
+
+    >>> max_subseq(20125, 3)
+    225
+    >>> max_subseq(20125, 5)
+    20125
+    >>> max_subseq(20125, 6) # note that 20125 == 020125
+    20125
+    >>> max_subseq(12345, 3)
+    345
+    >>> max_subseq(12345, 0) # 0 is of length 0
+    0
+    >>> max_subseq(12345, 1)
+    5
+    """
+    "*** YOUR CODE HERE ***"
+    if t == 0:
+        return 0
+    elif t >= len(str(n)):
+        return n
+    else:
+        return max(10 * max_subseq(n // 10, t - 1) + n % 10, max_subseq(n // 10, t))
+```
+
+
+
+# Lecture 12
+
+Box- and-pointer notation: a way to represent lists in the environment diagrams
+
+It's a series of adjacent boxes with two parts in each box, the first part is an index, the second is a value for this box or a pointer pointing to another box or pointing to a function.
+
+<br>
+
+Processing container values:
+
+```python
+sum(iterable [, initial_value]) -> value
+max(iteratble, key = func) -> value # max([func(ele) for ele in iterable])
+all(iterable) -> bool # True if the iterable is empty or bool(x) is true for each x in the iterable, False otherwise
+```
+
+<br>
+
+Trees abstraction:
+
+* Recursive definition: a root label and a list of branches, each branch is a tree; a tree with no branch is called a leaf
+* Relative definition: each location in a tree is a node, each node has a label that can be any value; one node can be parent/child of another
+
+<br>
+
+Sum of nested list: return a list, the element of which is the sum of the elements of the original list at that place
+
+<br>
+
+Functions that take trees as inputs/outputs are often tree-recursive themselves
