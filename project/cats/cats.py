@@ -38,6 +38,7 @@ def about(topic):
     assert all([lower(x) == x for x in topic]), 'topics should be lowercase.'
     # BEGIN PROBLEM 2
     "*** YOUR CODE HERE ***"
+
     # END PROBLEM 2
     def boolean_in(paragraph):
         paragraph_splits = [remove_punctuation(ele.lower()) for ele in paragraph.split()]
@@ -45,7 +46,9 @@ def about(topic):
             if ele.lower() in paragraph_splits:
                 return True
         return False
+
     return boolean_in
+
 
 def accuracy(typed, reference):
     """Return the accuracy (percentage of words typed correctly) of TYPED
@@ -84,6 +87,8 @@ def accuracy(typed, reference):
                 wrong += 1
 
         return correct * 100 / (correct + wrong)
+
+
 def wpm(typed, elapsed):
     """Return the words-per-minute (WPM) of the TYPED string."""
     assert elapsed > 0, 'Elapsed time must be positive'
@@ -101,6 +106,17 @@ def autocorrect(user_word, valid_words, diff_function, limit):
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
     # END PROBLEM 5
+    if user_word in valid_words:
+        return user_word
+    else:
+        difference_list = [(ele, diff_function(user_word, ele, limit)) for ele in valid_words]
+        min_diff = min(difference_list, key=lambda x: x[1])[1]
+        if min_diff > limit:
+            return user_word
+        else:
+            for ele in difference_list:
+                if ele[1] == min_diff:
+                    return ele[0]
 
 
 def shifty_shifts(start, goal, limit):
@@ -109,30 +125,48 @@ def shifty_shifts(start, goal, limit):
     their lengths.
     """
     # BEGIN PROBLEM 6
-    assert False, 'Remove this line'
     # END PROBLEM 6
-
+    def helper(start, goal,count):
+        if count > limit:
+            return limit + 1
+        if len(start) == 0 and len(goal) == 0:
+            return count
+        if len(start) == len(goal):
+            if start[0] != goal[0]:
+                return helper(start[1:], goal[1:], count + 1)
+            return helper(start[1:], goal[1:], count)
+        else:
+            short_len = min(len(start), len(goal))
+            return helper(start[:short_len], goal[:short_len], count + abs(len(start) - len(goal)))
+        
+    return helper(start, goal , 0)
 
 def pawssible_patches(start, goal, limit):
     """A diff function that computes the edit distance from START to GOAL."""
-    assert False, 'Remove this line'
-
-    if ______________: # Fill in the condition
+    
+    if limit < 0: # Fill in the condition
         # BEGIN
         "*** YOUR CODE HERE ***"
+        return 0
         # END
 
-    elif ___________: # Feel free to remove or add additional cases
+    elif len(start) == 0 or len(goal) == 0:  # Feel free to remove or add additional cases
         # BEGIN
         "*** YOUR CODE HERE ***"
+        # Say if len(start) == 0, we simply need len(goal) of add operations.
+        return len(start) or len(goal)  # Fill in these lines
         # END
 
     else:
-        add_diff = ... # Fill in these lines
-        remove_diff = ...
-        substitute_diff = ...
+        if start[0] == goal[0]:
+            return pawssible_patches(start[1:], goal[1:], limit)
+
+        add_diff = pawssible_patches(start, goal[1:], limit - 1)  # Fill in these lines
+        remove_diff = pawssible_patches(start[1:], goal, limit-1)
+        substitute_diff = pawssible_patches(start[1:], goal[1:], limit - 1)
         # BEGIN
         "*** YOUR CODE HERE ***"
+        return min(add_diff, remove_diff, substitute_diff) + 1
         # END
 
 
@@ -188,7 +222,7 @@ def fastest_words(game):
         a list of lists containing which words each player typed fastest
     """
     player_indices = range(len(all_times(game)))  # contains an *index* for each player
-    word_indices = range(len(all_words(game)))    # contains an *index* for each word
+    word_indices = range(len(all_words(game)))  # contains an *index* for each word
     # BEGIN PROBLEM 10
     "*** YOUR CODE HERE ***"
     # END PROBLEM 10
@@ -230,7 +264,9 @@ def game_string(game):
     """A helper function that takes in a game object and returns a string representation of it"""
     return "game(%s, %s)" % (game[0], game[1])
 
+
 enable_multiplayer = False  # Change to True when you're ready to race.
+
 
 ##########################
 # Command Line Interface #
