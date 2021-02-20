@@ -1,4 +1,4 @@
-# Lecture 01
+# Lecture 01 2018/08/22
 
 The Zen of Python:
 
@@ -20,7 +20,7 @@ words = file.read().decode().split()
 
 
 
-# Lecture 02
+# Lecture 02 2018/08/24
 
 The intrinsic name and the bound name of a function:
 
@@ -96,7 +96,7 @@ The built-in `repr` function, which returns an expression that evaluates to its 
 
 
 
-# Lecture 03
+# Lecture 03 2018/08/27
 
 If not short-circuiting, `and` and `or` Boolean operator returns the last expression they evaluate.
 
@@ -157,7 +157,7 @@ Common Bugs: spelling, missing parentheses, missing close quotes, == v.s. =, inf
 
 
 
-# Lecture 04
+# Lecture 04 2018/08/29
 
 Notice the following tuple assignment:
 
@@ -292,7 +292,7 @@ print(min(rs))
 
 
 
-# Lecture 05
+# Lecture 05 2018/08/31
 
 How to draw an environment diagram:
 
@@ -312,13 +312,13 @@ fn: <fun_name>   --------------------> func <fun_name>(<formal_parameters>)[pare
 </ol>
 
 
-# Lecture 06
+# Lecture 06 2018/09/03
 
 Self-reference: a function that refers to itself in the function body is called self-reference
 
 
 
-# Lecture 07
+# Lecture 07 2018/09/05
 
 Recursive function: can be divided into a base case and recursive function calls
 
@@ -357,7 +357,7 @@ A simple way to verify whether the check_digit is correct:  if `(sum_results + c
 
 
 
-# Lecture 08
+# Lecture 08 2018/09/07
 
 Functional abstractions: concrete implementations do not matter in this situation.
 
@@ -383,7 +383,7 @@ Test-driven development:
 </ul>
 
 
-# Lecture 09
+# Lecture 09 2018/09/12
 
 Different ways to implementations recursive functions:
 
@@ -420,7 +420,7 @@ lambda func: lambda args: func(func,args)             # This is a general form f
 
 
 
-# Lecture 10
+# Lecture 10 2018/09/14
 
 Each value in Python has a class that determines the type of the value, values share class and behavior.
 
@@ -447,7 +447,7 @@ Abstraction barrier: lower-layer functions are invisible to function users, they
 
 
 
-# Lecture 11
+# Lecture 11 2018/09/17
 
 Sequence: an ordered collection of values, there are different types of sequences, but they share common behaviors.
 
@@ -543,7 +543,7 @@ def max_subseq(n, t):
 
 
 
-# Lecture 12
+# Lecture 12 2018/09/19
 
 Box- and-pointer notation: a way to represent lists in the environment diagrams
 
@@ -573,3 +573,36 @@ Sum of nested list: return a list, the element of which is the sum of the elemen
 <br>
 
 Functions that take trees as inputs/outputs are often tree-recursive themselves
+
+
+
+#  Lecture 13 2018/09/21
+
+Objects combine data and behavior, objects represent information, but also behave like the things they represent.
+
+<br>
+
+```python
+from datetime import date
+mydate = date(22021,2,20)
+mydate.strftime('%a, %b %d')  # 'Sat Feb 20'  %a means week, %b means month, %d means day
+```
+
+<br>
+
+```python
+str.swapcase()  # swap lowercases and uppercases in a string
+```
+
+<br>
+
+Identity operator and equality operator:
+
+```python
+a is b # True is a and b points to the same object
+a == b # True if the pointed objects have the same value
+# If a is b equals to true then a == b must be true, but no otherwise
+```
+
+
+
