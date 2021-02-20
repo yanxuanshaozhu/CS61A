@@ -124,9 +124,10 @@ def shifty_shifts(start, goal, limit):
     in START need to be substituted to create GOAL, then adds the difference in
     their lengths.
     """
+
     # BEGIN PROBLEM 6
     # END PROBLEM 6
-    def helper(start, goal,count):
+    def helper(start, goal, count):
         if count > limit:
             return limit + 1
         if len(start) == 0 and len(goal) == 0:
@@ -138,13 +139,14 @@ def shifty_shifts(start, goal, limit):
         else:
             short_len = min(len(start), len(goal))
             return helper(start[:short_len], goal[:short_len], count + abs(len(start) - len(goal)))
-        
-    return helper(start, goal , 0)
+
+    return helper(start, goal, 0)
+
 
 def pawssible_patches(start, goal, limit):
     """A diff function that computes the edit distance from START to GOAL."""
-    
-    if limit < 0: # Fill in the condition
+
+    if limit < 0:  # Fill in the condition
         # BEGIN
         "*** YOUR CODE HERE ***"
         return 0
@@ -162,7 +164,7 @@ def pawssible_patches(start, goal, limit):
             return pawssible_patches(start[1:], goal[1:], limit)
 
         add_diff = pawssible_patches(start, goal[1:], limit - 1)  # Fill in these lines
-        remove_diff = pawssible_patches(start[1:], goal, limit-1)
+        remove_diff = pawssible_patches(start[1:], goal, limit - 1)
         substitute_diff = pawssible_patches(start[1:], goal[1:], limit - 1)
         # BEGIN
         "*** YOUR CODE HERE ***"
@@ -185,6 +187,15 @@ def report_progress(typed, prompt, user_id, send):
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
     # END PROBLEM 8
+    result = 0.0
+    for index in range(len(typed)):
+        if typed[index] != prompt[index]:
+            result = index / len(prompt)
+            break
+        else:
+            result = (index + 1) / len(prompt)
+    send({'id': user_id, 'progress': result})
+    return result
 
 
 def fastest_words_report(times_per_player, words):
@@ -211,6 +222,12 @@ def time_per_word(times_per_player, words):
     # BEGIN PROBLEM 9
     "*** YOUR CODE HERE ***"
     # END PROBLEM 9
+    times = [[] for _ in range(len(times_per_player))]
+    for player_index in range(len(times_per_player)):
+        for timestamp_index in range(len(times_per_player[player_index]) - 1):
+            times[player_index].append(
+                times_per_player[player_index][timestamp_index + 1] - times_per_player[player_index][timestamp_index])
+    return game(words, times)
 
 
 def fastest_words(game):
@@ -226,6 +243,16 @@ def fastest_words(game):
     # BEGIN PROBLEM 10
     "*** YOUR CODE HERE ***"
     # END PROBLEM 10
+    result = [[] for _ in range(len(game[1]))]
+    for word_index in word_indices:
+        fatest_index = 0
+        fatest_time = game[1][0][word_index]
+        for player_index in range(1, len(game[1])):
+            if game[1][player_index][word_index] < fatest_time:
+                fatest_index = player_index
+                fatest_time = game[1][fatest_index][word_index]
+        result[fatest_index].append(game[0][word_index])
+    return result
 
 
 def game(words, times):
