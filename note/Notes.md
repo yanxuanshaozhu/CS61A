@@ -606,3 +606,157 @@ a == b # True if the pointed objects have the same value
 
 
 
+# Lecture 14 2018/09/24
+
+Motivation: Sometimes we want to maintain some state within a function. For example, if we define a function called `withdraw(amount)` to withdraw  a certain amount of money from the bank,  the function returns the remaining balance in your account. We then want to maintain the balance within the function, which means if we call the function multiple times with the same amount parameter, we should have different returning values. 
+
+There are two different ways to tackle this problem:
+
+* We can use the nonlocal statement:
+
+```python
+def withdraw_account(balance):
+    def withdraw(amount):
+        nonlocal balance
+        if amount > balance:
+            return 'Insufficient funds'
+        balance -= amount
+        return balance
+    return withdraw
+```
+
+* We can use the mutable objects:
+
+```python
+def withdraw_account(balance):
+    b = [balance]
+    def withdraw(amount):
+        if amount > b[0]:
+            return 'Insufficient funds'
+        b[0] -= amount
+        return b[0]
+    return withdraw
+```
+
+<br>
+
+If you use nonlocal statement for a variable, then it must be bound in the first non-local parent frame of the current frame.
+
+<br>
+
+Python pre-computes which frame contains which names before executing the function body. Within a function body, all instances of a name must refer to the same frame.
+
+```python
+def withdraw_account(balance):
+    def withdraw(amount):
+        #nonlocal balance
+        if amount > balance:
+            return 'Insufficient funds'
+        balance -= amount
+        return balance
+    return withdraw
+```
+
+In the above example, if we omit the nonlocal statement, it will cause a UnboundLocalError, because within the body of function withdraw, the local variable `balance` is referenced before assignment.
+
+<br>
+
+Referential transparency: if an expression can be replaced by its value without changing the meaning of a program, then the expression is called referential transparent.
+
+<br>
+
+An example of nonlocal statement:
+
+```python
+def f(x):
+    x = 4
+    def g(y):
+        def h(z):
+            nonlocal x
+            x += 1
+            return x + y + z
+        return h
+    return g
+a = f(1)
+b = a(2)
+total = b(3) + b(4) # 22, b(3) == 10, b(4) == 12
+```
+
+
+
+# Lecture 15 2018/09/26
+
+Iterators:
+
+1. An container can provide and iterator that provides access to its elements in some order
+
+2. Some related functions:
+    2.1. iter(iterable): returns an iterator
+
+  2.2. next(iterator): returns the next element in the iterator
+
+  2.3. list(iterator): list the unvisited elements in the iterator. If listed, then an iterator cannot be used again, otherwise an StopIterationError will be caused
+
+3. Iterators are mutable objects
+
+<br>
+
+Dictionary iteration:
+
+1. The values, keys and items of a dictionary are all iterable. For Python version 3.6 and higher, the iteration order is the order by which items are added into the dictionary, for Python version 3.5 or lower, the iteration order is arbitrary.
+2. If the size of the dictionary is changed during iteration(you add something into the dictionary or you pop something during iteration), an RuntimeError will be caused. For lists,  you can do whatever you want to the list during iteration.
+
+```python
+# If you want to remove keys of which the values are empty,the following way is wrong and causes an RuntimeError
+for key in d:
+    if not d[key]:
+        d.pop(key)                               
+# You should do like this
+for key in d.copy():
+    if not d[key]:
+        d.pop(key)
+```
+
+<br>
+
+For iteration over iterables and iterators:
+
+```python
+for _ in iterable:                 # Iteration on iterables can be executed multiple times
+    pass
+
+for _ in iterator:                 # Iteration on iterators can be executed only once, otherwise StopIterationErro is caused
+    pass
+```
+
+<br>
+
+Built-in iterator functions:
+
+1. Many operations on sequences return iterators that compute results lazily, lazy computation means result is only computed when needed
+
+2. Example functions:
+
+    2.1 map(func, iterable)
+
+    2.2 filter(func, iterable)
+
+    2.3 zip(first_iter, second_iter)
+
+    2.4 reserved(seq)
+
+<br>
+
+Generators:
+
+1. Generators are special iterators that they are results of generator functions
+2. A generator function uses yield statements to replace the return statement, all yield statements can be executed and related values can be returned
+3. Yield from statement: returns al values in an iterable or an iterator,the following two ways are equal:
+
+```python
+for x in iterable:
+    yield x
+
+yield from iterable
+```
+
