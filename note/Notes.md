@@ -760,3 +760,41 @@ for x in iterable:
 yield from iterable
 ```
 
+
+
+# Lab 05
+
+### Q9: Riffle Shuffle
+
+The familiar [riffle shuffle](https://fredhohman.com/card-shuffling/static/images/riffle.gif) of a deck of cards (or in our case, of a sequence of things) results in a new configuration of cards in which the top card is followed by the middle card, then by the second card, then the card after the middle, and so forth. Assuming the deck (sequence) contains an even number of cards, write a list comprehension that produces the shuffled sequence.
+
+*Hint:* To write this as a single comprehension, you may find the expression `k%2`, which evaluates to 0 on even numbers and 1 on odd numbers, to be useful. Consider how you can use the 0 or 1 returned by `k%2` to alternatively access the beginning and the middle of the list.
+
+```python
+def riffle(deck):
+    """Produces a single, perfect riffle shuffle of DECK, consisting of
+    DECK[0], DECK[M], DECK[1], DECK[M+1], ... where M is position of the
+    second half of the deck.  Assume that len(DECK) is even.
+    >>> riffle([3, 4, 5, 6])
+    [3, 5, 4, 6]
+    >>> riffle(range(20))
+    [0, 10, 1, 11, 2, 12, 3, 13, 4, 14, 5, 15, 6, 16, 7, 17, 8, 18, 9, 19]
+    """
+    "*** YOUR CODE HERE ***"
+    return _______
+```
+
+My intuition: we first make a list of nested lists, each element in the out-layer list is a two-element list, then we reduce the out-layer list to one dimension,
+
+```python
+	return [item for sublits in [[deck[k], deck[k + len(deck) // 2] for k in range(len(deck) // 2)] for item in sublist] 
+```
+
+
+
+Another solution following the hint: for odd position, the index needs to plus `len(deck) // 2`, for even position, the index is just `k`, so we simply use `k % 2` to separate the indices,
+
+```python
+	return [deck[k + (k % 2) * (len(deck) // 2)] for k in range(len(deck))] 
+```
+
