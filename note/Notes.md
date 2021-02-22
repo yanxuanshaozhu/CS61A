@@ -764,7 +764,7 @@ yield from iterable
 
 # Lab 05
 
-### Q9: Riffle Shuffle
+Q9: Riffle Shuffle
 
 The familiar [riffle shuffle](https://fredhohman.com/card-shuffling/static/images/riffle.gif) of a deck of cards (or in our case, of a sequence of things) results in a new configuration of cards in which the top card is followed by the middle card, then by the second card, then the card after the middle, and so forth. Assuming the deck (sequence) contains an even number of cards, write a list comprehension that produces the shuffled sequence.
 
@@ -797,4 +797,64 @@ Another solution following the hint: for odd position, the index needs to plus `
 ```python
 	return [deck[k + (k % 2) * (len(deck) // 2)] for k in range(len(deck))] 
 ```
+
+
+
+# Lab 06
+
+Q4: Insert Items
+
+Write a function which takes in a list `lst`, an argument `entry`, and another argument `elem`. This function will check through each item present in `lst` to see if it is equivalent with `entry`. Upon finding an equivalent entry, the function should modify the list by placing `elem` into the list right after the found entry. At the end of the function, the modified list should be returned. See the doctests for examples on how this function is utilized. Use list mutation to modify the original list, no new lists should be created or returned.
+
+**Be careful in situations where the values passed into `entry` and `elem` are equivalent, so as not to create an infinitely long list while iterating through it.** If you find that your code is taking more than a few seconds to run, it is most likely that the function is in a loop of inserting new values.
+
+```python
+def insert_items(lst, entry, elem):
+    """
+    >>> test_lst = [1, 5, 8, 5, 2, 3]
+    >>> new_lst = insert_items(test_lst, 5, 7)
+    >>> new_lst
+    [1, 5, 7, 8, 5, 7, 2, 3]
+    >>> large_lst = [1, 4, 8]
+    >>> large_lst2 = insert_items(large_lst, 4, 4)
+    >>> large_lst2
+    [1, 4, 4, 8]
+    >>> large_lst3 = insert_items(large_lst2, 4, 6)
+    >>> large_lst3
+    [1, 4, 6, 4, 6, 8]
+    >>> large_lst3 is large_lst
+    True
+    """
+    "*** YOUR CODE HERE ***"
+```
+
+At first , I did not notice the restriction that no new lists were allowed to be created, so I wrote the following codes.
+
+```python
+def insert_items(lst, entry, elem):
+    items = [(ele, 0) for ele in lst]
+    for _ in range(len(items)):
+        if items[_][0] == entry and items[_][1] == 0:
+            items.insert(- + 1, (elem, 1))
+    return [item[0] for item in items]
+            
+```
+
+The main idea is that we can add a marker to identify whether the element locates originally in the list or is inserted into the list. Although this way does not meet the requirement of this question, I still find it interesting. 
+
+The following codes do meet the needs of this question:
+
+```python
+def insert_items(lst, entry, elem):
+    index = 0
+    while index < len(lst):
+        if lst[index] == entry:
+            lst.insert(index + 1, elem)
+            index += 2
+        else:
+            index += 1
+    return lst
+```
+
+
 
