@@ -194,6 +194,17 @@ def make_joint(withdraw, old_pass, new_pass):
     "Frozen account. Attempts: ['my', 'secret', 'password']"
     """
     "*** YOUR CODE HERE ***"
+    test = withdraw(0, old_pass)
+    if type(test) == str:
+        return test
+
+    def joint_withdraw(amount, pwd):
+        if pwd == old_pass or pwd == new_pass:
+            return withdraw(amount, old_pass)
+        return withdraw(amount, pwd)
+
+    return joint_withdraw
+
 
 
 def remainders_generator(m):
@@ -228,6 +239,14 @@ def remainders_generator(m):
     11
     """
     "*** YOUR CODE HERE ***"
+    def multiple(m, n):
+        for _ in naturals():
+            rs = (_ - 1) * m + n
+            if rs > 0:
+                yield rs
+    for _ in range(m):
+        yield multiple(m, _)
+    
 
 
 def naturals():
