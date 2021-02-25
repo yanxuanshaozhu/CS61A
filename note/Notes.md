@@ -858,3 +858,79 @@ def insert_items(lst, entry, elem):
 
 
 
+# Lecture 16 2018/09/28
+
+1 Classes and objects:
+
+1. class is a template for objects that share same attributes and behaviors, the objects are class instances
+2. creating an instance of a class is also called instancing the class
+3. attributes associated with instances are also called instance attributed, fields, properties and instance variables, function attributes are also called methods
+
+<br>
+
+2 Dual roles of object in the `object.method` expression:
+
+1.  the object means the method is not in the global environment, but inside the local environment of a class
+2.  the object is bound to the first argument `self` in the method
+
+<br>
+
+3 Functions and methods:
+
+```python
+type(Class_name.func_name(object, arguments))          # <class 'function'>
+type(instance_name.func_name(arguments))               # <class 'method'>
+```
+
+Notice that when calling a method using a Class object, we need to explicitly specify the object that is bound to the `self` argument in the method, but when calling a method using an instance, we don't need to do that.
+
+<br>
+
+4 Class attributes:
+
+1. Evaluation procedure of `<object>.<attribute>`:
+    1.  we first evaluate the object
+    2. then we look up the attribute in the current class, if it exists, return the value of that attribute
+    3. if the attribute doesn't exist in the current class, we look up the attribute in parent  classes, if it is found, return the value of that attribute
+    4. if the attribute is a method instead, return the result value of that method
+
+2. attribute assignment
+
+```python
+instance.attribute = value 
+"""
+the code creates an instance field and assigns a value to it, if there exists already a class attribute with the same name, it doesn't change the value of that class attribute
+"""
+Class.attribute = value
+"""
+this code creates a class attribute and assigns a value to it, it affects all instances without instance attributes of the same name, it has no effect for those instances that have an attribute with the same name
+"""
+```
+
+
+
+# Lecture 17 2018/10/01
+
+1 Terminologies: parent class/ base class/ superclass                            subclass
+
+<br>
+
+2 Interfaces:
+
+1. Def: a collection of attributes and conditions on those attributes
+2. In Java, you need to explicitly declare an interface, however, in Python, Ruby and Go, an object with the appropriate name implements an interface already
+
+<br>
+
+3 Multiple inheritances:
+
+1. Order: from bottom to top, from left to right in the same layer(the left-to-right order is the same as the order written in the class arguments)
+2. The algorithm is called the C3 Resolution Ordering
+
+<br>
+
+4 Object-oriented design principles:
+
+1. Don't repeat yourself, use existing implementations
+2. Attributes that have been overridden are still accessible via class objects:  `Parent_class_name.attribute`
+3. Look up attributes on instances whenever possible
