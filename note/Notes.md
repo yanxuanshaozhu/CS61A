@@ -934,3 +934,74 @@ this code creates a class attribute and assigns a value to it, it affects all in
 1. Don't repeat yourself, use existing implementations
 2. Attributes that have been overridden are still accessible via class objects:  `Parent_class_name.attribute`
 3. Look up attributes on instances whenever possible
+
+
+
+# Lab 07
+
+Don't modify a list while iterating on it using for loop, it may result in wrong results, particularly, don't remove elements during iteration.
+
+Reason: the for loop uses list indices to record the iteration process, however, deleting items in the list results in mismatch of the current list with the original indices.
+
+```python
+"""
+Say if you want to delete all zeros in the following list and you wirte codes like this:
+"""
+ls = [1, 0, 0, 1, 1, 0, 0, 1]
+for item in ls:
+    if item == 0:
+        ls.remove(item)
+# >> x   => [1, 1, 1, 0, 0, 1]
+"""
+The whole procedure
+list.remove(item): remove the first element in the list that equals to item
+index = 0,  len(ls) = 8       original list: ls = [1, 0, 0, 1, 1, 0, 0, 1]       item = ls[index] = 1       nothing changed
+index = 1,  len(ls) = 7       original list: ls = [1, 0, 0, 1, 1, 0, 0, 1]       item = ls[index] = 0       delete the first 0 in ls
+index = 2   len(ls) = 7		  original list: ls = [1, 0, 1, 1, 0, 0, 1]          item = ls[index] = 1       nothing changed
+index = 3   len(ls) = 7       original list: ls = [1, 0, 1, 1, 0, 0, 1]          item = ls[index] = 1       nothing changed
+index = 4   len(ls) = 7       original list: ls = [1, 0, 1, 1, 0, 0, 1]          item = ls[index] = 0       delete the first 0 in ls
+index = 5   len(ls) = 6       original list: ls = [1, 1, 1, 0, 0, 1]             item = ls[index] = 1       done!
+
+Another failed trail would be like this:
+"""
+ls = [1, 0, 0, 1, 1, 0, 0, 1]
+for _ in range(len(ls)):
+    if ls[_] == 0:
+        ls.pop(_)
+# >>IndexError: list index out of range
+
+"""
+The for loop will adjust for changes in list length, but the for with index loop will not, so it will iterate for len(ls) times, however, because of the item deletion during the iteration, the length of list is shortened, thus an error will be caused.
+"""
+```
+
+There are several ways to correct this:
+
+1. Use filter function:
+
+```python
+ls = list(filter(lambda x: x != 0, ls))
+# The filter function returns an iterator, so we need to convert it into list
+```
+
+2.  Use list comprehension:
+
+```python
+ls = [x for x in ls if x != 0]
+```
+
+3. Iterate on the copy:
+
+```python
+for item in ls.copy():
+    if item == 0:
+        ls.remove(item)
+#Another way to denote copy
+for item in ls[:]:
+    if i tme == 0:
+        ls.remove(item)
+        
+```
+
+
+
