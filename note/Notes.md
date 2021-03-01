@@ -1005,3 +1005,119 @@ for item in ls[:]:
 
 
 
+# Lecture 18 2018/10/03
+
+1 Generic functions:
+
+1. Can accept values of multiple types
+2.  Three implementing techniques: shared interfaces, type dispatching and type coercion
+
+<br>
+
+2 String conversion:
+
+1. Python has two ways of string representation:
+    1. Human-interpretable text: `str(x)`
+    2. Python-interpretable expression: `repr(x)`
+2. `repr(object)`: returns the canonical string representation of the object
+    1. For most cases we have: `eval(repr(object)) == object`
+    2. For some cases like built-in functions the above relationship doesn't hold
+3. Use string representations in user-defined classes:
+    1. The `str(object)` invokes `object.__str__()` , it is used in the `print(object)`
+    2. The `repr(object)` invokes `object.__repr__()`, it is used in the interactive session
+    3. If we explicitly overwrite the `__str__()` and the `__repr__()` in our class, then instances of our class have string representation 
+
+<br>
+
+3 Special Methods:
+
+1. `__init__()`: construct objects                                               
+2. `__str__()`: print objects
+
+3. `__repr__() `: display objects in the interactive session
+
+4. `__bool__()`: return bool values of objects,
+
+    1. For instances of user-defined classes, the default `object.__bool__()` returns `True`
+
+    2. We can overwrite the function to manipulate its behavior:
+
+        ```python
+        __bool__ = lambda self: self.__len__() == 0           # If the length of an object equals to zero, returns True
+        ```
+
+5. `__call__()`: allows objects to behave like higher-order function
+
+<br>
+
+4 Three ways to implement generic function:
+
+1. Shared Interfaces: use a collection of shared attributes and behaviors, interface is additive
+2. Type Dispatching: check instance types, do different things for instances of different types, the `isinstance(object, type)` function is used here
+
+3. Type Coercion: we can deem subclass objects as superclass objects, or we can explicitly define a conversion function to transfer objects of one type into objects of another type
+
+
+
+# Lecture 19 2018/10/05
+
+1 Efficiency:
+
+1. Definition: the computational resources used by a representation or processes
+
+2. Measurement: time and space
+
+3. Space requirements: how memory is used, preserved and reclaimed
+
+    1.  All active environments with referenced values and frames are preserved by the interpreter
+
+4. Efficiency can be greatly improved by memorization:
+
+    ```python
+    def fib(n):
+        if n == 0:
+            return 0
+        elif n == 1:
+            return 1
+        else:
+            return fib(n - 1) + fib(n - 2)
+        
+    def memo(f):
+            cache = {}
+            def memoized(n):
+                if n not in cache:
+                    cache[n] = f(n)
+                return cache[n]
+            return memoized
+    fib = memo(fib)
+    
+    #Notice we can use dp to solve this:
+    def fib(n):
+        if n == 0:
+            return 0
+        elif n == 1:
+            return 1
+        else:
+            p, q, r = 0, 0, 1
+            for _ in range(2, n + 1):
+                p, q = q, r
+                r = p + q
+            return r
+    ```
+
+2 Order of growth:
+
+1. Definition:  let input scale be $n$, let resource requirement b $R(n)$, We say that $R(n)$ as order of growth $\Theta(f(n))$, written $R(n) = \Theta(f(n))$, if there are positive constants $k_1$,  $k_2$ such that $k_1 * f(n) \leq R(n) \leq k_2 * f(n)$
+2. Tips:
+    1. Constants do not affect order of growth
+    2. Base of logarithms does not affect order of growth
+    3. When an inner computational process is repeated for each step in an outer process, then the order of growth of the entire process is a product of the number of steps in the outer and inner processes
+3.  Common categories:
+    1. $\Theta(1)$: constant
+    2. $\Theta(logn)$: logarithm
+    3. $\Theta(n)$: linear
+    4. $\Theta(n^2)$: quadratic
+    5. $\Theta(b ^n)$: exponential
+
+
+

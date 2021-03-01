@@ -1,5 +1,5 @@
 # CS61A
-My learning materials for the UCB course  CS61A 2020 fall.
+My learning materials for the UCB course  CS61A 2018 fall and 2020 fall. I watched 2018 fall course videos and read corresponding slides. I also finished projects, homework, labs and discussions posted on the 2020 fall course website.
 
 <br>
 
