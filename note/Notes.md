@@ -1121,3 +1121,66 @@ for item in ls[:]:
 
 
 
+# Lecture 20 2018/10/08 
+
+1 Linked List:
+
+1. Definition: first + rest of the list; the rest of the linked list is also a linked list;
+2. Empty linked list: no first element, no rest of the list
+3. A linked list is a sequence, it has finite length and supports element selection
+
+<br>
+
+2 Tree:
+
+1. Definition: a label + branches; each branch is also a tree
+2. Leaf: a tree is a leaf if it has no branches
+
+
+
+# Lecture 21 2018/10/10
+
+1 Set:
+
+1. Definition: unordered collection or elements, no duplication in a set
+
+2. Printing order of a set may be different from the displaying order of a set
+
+3. Set operations:
+
+    * union, intersection, isdisjoint, issubset, issuperset
+    * add, remove, discard, pop
+        * remove: return None, if the element is not in the set, KeyError is caused
+        * discard: return None, if the element is not in the set, KeyError is not caused
+        * pop: return the removed element, if the element is not in the set, KeyError is caused
+    * clear, update
+
+4. Set implementations:  let $m, n $ be the length or the set
+
+    * Unordered sequence: implemented by linked list:
+        * Contain operation complexity: $\Theta(n)$
+        * Intersect operation complexity: $\Theta(n * m)$
+    * Ordered sequence: implemented by linked list:
+        * Contain operation complexity: $\Theta(n)$
+        * Intersect operation complexity: $\Theta(n + m)$
+
+    * Binary search tree: implemented by tree:
+        * Contain operation complexity: $\Theta(log_2n)$
+        * Adjourn operation complexity: $\Theta(1)$
+
+
+
+# Lecture 22 2018/10/12
+
+1 Binary Search Tree(BST):
+
+1. Definition: 
+
+    * A leaf is a BST
+
+    * Each node has at most two children, each children is a BST
+    * For each node, the entries in the left child should be smaller than the label of the node
+    * For each node, the entries in the right child should be larger than the label of the node
+
+2.  For adjourn operation, a BST is faster than an ordered linked list
+
