@@ -1184,3 +1184,86 @@ for item in ls[:]:
 
 2.  For adjourn operation, a BST is faster than an ordered linked list
 
+
+
+# Lecture 23 2018/10/15  & Lecture 24 2018/10/19
+
+Lecture 23 is a review session, nothing interesting.
+
+Lecture 24 is Alan Kay's presentation on the history of programming language and user interface design.
+
+
+
+# Lecture 25 2018/10/22
+
+1 Interpreter: a program that carries out evaluation and execution procedures
+
+<br>
+
+2 Programming Language:
+
+1. PLs vary widely in syntactic structures, features and domain of application
+2. A powerful PL can exist without object system, higher-order function, assignment or even control structures
+3. The part of Scheme discussed in this class is limited into topics like expressions but not statements, symbolic computations and mutable values
+
+<br>
+
+3 Functional Programming
+
+1. Low-level machine language cares about representation of data and control in terms of storage and primitive machine structures, higher-level language has means of combination and abstraction to apply in larger-scale organization of software systems
+2. Scheme is a dialect of Lisp
+
+3. Expressions:
+
+    * Expressions are bound with parentheses
+    * If statement:`(if <predicate> <consequent> <alternative>)`. Scheme does not have `elif` statement, you need to use nested if statements.
+        * For numeric comparison: `(> 2 3)` is okay
+
+    * Boolean values: `#t` for `True`, `#f` for `False`
+    * Logical operations, short-circuiting is applied:
+        * `(and <e1> ... <en>)`
+        * `(or <e1> ... <en>)`
+        * `(not <e>)`
+
+4. Definitions
+
+    * Definition of variable: `(define <var> <value>)`
+    * Definition of function: `(define (<name> <formal parameters>) <body>)`
+    * Call of function: `(<name> <arguments>)`
+    * Lambda expression/ anonymous function: `(lambda (<formal parameters> <body>))`
+
+5. Compound Values:
+
+    * Built-in pairs: `(cons <value1> <value2>)`
+
+        ``` scheme
+        (define x (cons 1 2))
+        ; Anything followed by a ';' is a comment
+        ; Take the first element of a pair
+        (car x) ; 1
+        ; Take the second element of a pair
+        (cdr x) ; 2
+        ```
+
+    * Built-in lists: 
+
+        * The empty list `nil` or `'()`
+
+        ```scheme
+        ; You can construct a list from nested pairs
+        (cons 1
+              (cons 2
+                    (cons 3 
+                          (cons 4 nil)))); (1 2 3 4)
+        ; You can also use the list notation
+        (list 1 2 3 4); (1 2 3 4)
+        ```
+
+6. Symbolic Data: use a quotation mark to denote symbolic data
+
+     ``` scheme
+     (define a 1)
+     (define b 2)
+     (cons a b); (1 2)
+     (cons 'a b); (a 2)
+     ```
