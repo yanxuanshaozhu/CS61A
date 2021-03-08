@@ -209,15 +209,24 @@ def make_advanced_counter_maker():
     >>> tom_counter('global-count')
     1
     """
-    ________________
-    def ____________(__________):
-        ________________
-        def ____________(__________):
-            ________________
-            "*** YOUR CODE HERE ***"
-            # as many lines as you want
-        ________________
-    ________________
+    global_count = 0
+    def count_helper():
+        local_count = 0
+        def counter(info):
+            nonlocal global_count, local_count
+            if info == 'count':
+                local_count += 1
+                return local_count
+            elif info == 'reset':
+                local_count = 0
+            elif info == 'global-count':
+                global_count += 1
+                return global_count
+            elif info == 'global-reset':
+                global_count = 0
+        return counter
+    return count_helper
+
 
 
 def trade(first, second):
@@ -249,14 +258,14 @@ def trade(first, second):
     """
     m, n = 1, 1
 
-    equal_prefix = lambda: ______________________
-    while _______________________________:
-        if __________________:
+    equal_prefix = lambda: sum(first[:m]) - sum(second[:n])
+    while m < len(first) and n < len(second) and not equal_prefix() == 0:
+        if  equal_prefix() < 0:
             m += 1
         else:
             n += 1
 
-    if equal_prefix():
+    if equal_prefix() == 0:
         first[:m], second[:n] = second[:n], first[:m]
         return 'Deal!'
     else:
@@ -288,11 +297,11 @@ def shuffle(cards):
     ['A♡', 'A♢', 'A♤', 'A♧', '2♡', '2♢', '2♤', '2♧', '3♡', '3♢', '3♤', '3♧']
     """
     assert len(cards) % 2 == 0, 'len(cards) must be even'
-    half = _______________
+    half = len(cards) // 2
     shuffled = []
-    for i in _____________:
-        _________________
-        _________________
+    for i in range(half):
+        shuffled.append(cards[i])
+        shuffled.append(cards[half + i])
     return shuffled
 
 
@@ -311,14 +320,13 @@ def insert(link, value, index):
     >>> insert(link, 4, 5)
     IndexError
     """
-    if ____________________:
-        ____________________
-        ____________________
-        ____________________
-    elif ____________________:
-        ____________________
+    if index == 0:
+        link.rest = Link(link.first, link.rest)
+        link.first = value
+    elif link.rest is Link.empty:
+        raise IndexError
     else:
-        ____________________
+        insert(link.rest, value, index - 1)
 
 
 
@@ -336,12 +344,12 @@ def deep_len(lnk):
     >>> deep_len(levels)
     5
     """
-    if ______________:
+    if lnk is Link.empty:
         return 0
-    elif ______________:
+    elif  isinstance(lnk, Link) and isinstance(lnk.first, Link) and lnk.rest is Link.empty or not isinstance(lnk, Link):
         return 1
     else:
-        return _________________________
+        return deep_len(lnk.first) + deep_len(lnk.rest)
 
 
 def make_to_string(front, mid, back, empty_repr):
@@ -360,10 +368,10 @@ def make_to_string(front, mid, back, empty_repr):
     '()'
     """
     def printer(lnk):
-        if ______________:
-            return _________________________
+        if lnk is Link.empty:
+            return empty_repr
         else:
-            return _________________________
+            return front + str(lnk.first) + mid + printer(lnk.rest) + back
     return printer
 
 
@@ -384,11 +392,11 @@ def prune_small(t, n):
     >>> t3
     Tree(6, [Tree(1), Tree(3, [Tree(1), Tree(2)])])
     """
-    while ___________________________:
-        largest = max(_______________, key=____________________)
-        _________________________
-    for __ in _____________:
-        ___________________
+    while len(t.branches) > n:
+        largest = max(t.branches, key = lambda x: x.label)
+        t.branches.remove(largest)
+    for branch in t.branches:
+        prune_small(branch, n)
 
 
 class Link:
