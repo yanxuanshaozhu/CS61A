@@ -1194,7 +1194,7 @@ Lecture 24 is Alan Kay's presentation on the history of programming language and
 
 
 
-# Lecture 25 2018/10/22
+# Lecture 24 2018/10/22
 
 1 Interpreter: a program that carries out evaluation and execution procedures
 
@@ -1267,3 +1267,87 @@ Lecture 24 is Alan Kay's presentation on the history of programming language and
      (cons a b); (1 2)
      (cons 'a b); (a 2)
      ```
+
+
+
+# Lab 10
+
+1 `cond`expression
+
+1. Syntax: `(cond (<p1> <e1>) (<p2> <e2>) ... (<pn> <en>) [(else <else expression>)])`
+2. `<p1> ... <pn>` are predicates that can be evaluated to be `#t` or `#f`, `<e1> ... <en>` are expressions that could be executed
+3. If `<p1> ... <pk-1>` are all `#f` and `<pk>` is `#t`, then `<ek>` is executed and the `cond` expression terminates  here
+
+<br>
+
+2 Selecting elements from a list:
+
+1. The `car` operator selects the first element in the list
+2. The `cdr` operator selects all elements in the list but the first one, is returns a sublist
+
+```scheme
+(define x list(1 2 3 4))
+(car x); 1
+(cdr x); (2 3 4)
+```
+
+
+
+# Lecture 25 2018/10/24
+
+1 Python interpreter handles errors by terminating immediately and printing an error message.<br>
+
+2 Raise an expression is a technique for interrupting the normal flow of execution in a program, signaling that some exceptional circumstance has arisen, and returning directly to an enclosing part of a program that was designated to react to this circumstance.<br>
+
+3 You can raise an exception with the `raise` statement or the `assert` statement
+
+1. An exception is an object instance inherited from the `BaseException` class
+2. `assert` statement raises an exception with the `AssertionError` class
+3. Syntax for raise statement: `raise Exception('Error information string')`
+4. If an exception occurs, no further statements in the same block of codes will be executed unless the exception is handled, the interpreter will also print a stack backtree to indicate the source of the exception<br>
+
+4 Handling an exception:
+
+1. Syntax
+
+```python
+try:
+    pass
+catch <Exception Class> as <name>:
+    pass
+```
+
+<br>
+
+5 Exception objects:
+
+1. Exception objects can have attributes
+2. You can build a class that inherits the Exception class and customize instance behaviors<br>
+
+
+
+# Lecture 26 2018/10/26
+
+1 The Scheme-Syntax Calculator(aka Calculator)
+
+1. It has two legal expressions: numbers that are self-evaluating and call expressions that are Pair instances representing Scheme lists
+2. It has an interpreter that takes in text inputs and outputs Calculator expressions<br>
+
+2 Parsing Expressions:
+
+1. Definition: generate expression trees from raw text input
+2. Construction of the parser: lexical parser(aka tokenizer) and the syntactic analyzer
+    * Lexical parser: partitions one text input expression into tokens
+    * Syntactic parser: construct an expression tree from tokens, it is a tree-recursive process<br>
+
+3 The REPL
+
+1. The interactive interface of an interpreter is a REPL(read-eval-print loop)
+2. The implementation of a REPL can be independent of the interpreter it uses
+3. The process of the REPL:
+    1. Print a prompt to denote the REPL is ready
+    2. Read the text input
+    3. Parse the text input into expression
+    4. Evaluate the expression
+    5. If error occurs, report the error, otherwise print the expression value and return to Step 1
+
