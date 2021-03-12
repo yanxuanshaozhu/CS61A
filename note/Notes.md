@@ -1194,7 +1194,7 @@ Lecture 24 is Alan Kay's presentation on the history of programming language and
 
 
 
-# Lecture 24 2018/10/22
+# Lecture 25 2018/10/22
 
 1 Interpreter: a program that carries out evaluation and execution procedures
 
@@ -1293,7 +1293,7 @@ Lecture 24 is Alan Kay's presentation on the history of programming language and
 
 
 
-# Lecture 25 2018/10/24
+# Lecture 26 2018/10/24
 
 1 Python interpreter handles errors by terminating immediately and printing an error message.<br>
 
@@ -1326,7 +1326,7 @@ catch <Exception Class> as <name>:
 
 
 
-# Lecture 26 2018/10/26
+# Lecture 27 2018/10/26
 
 1 The Scheme-Syntax Calculator(aka Calculator)
 
@@ -1351,3 +1351,118 @@ catch <Exception Class> as <name>:
     4. Evaluate the expression
     5. If error occurs, report the error, otherwise print the expression value and return to Step 1
 
+
+
+# Lecture 28 2018/10/29 
+
+1 Scheme interpreter structure:
+
+1. parsing 
+2. evaluation
+3. procedure application
+4. eval/apply recursion
+
+<br>
+
+2 Logical special forms: only evaluate some sub-expressions
+
+1. `If` expression
+2. `And` or `or`
+3. `Cond` expression
+
+<br>
+
+3 Quotation:
+
+1. Definition: the `quote` special form evaluates to the quoted expression, which is not evaluated
+2. Syntax: `(quote <expression>)`
+3. `'<expression>` is shorthand for `(quote <expression>)`
+2.
+<br>
+
+4 Lambda expression:
+
+1. Lambda expressions evaluate to user-defined procedures
+2. Syntax `(lambda (<formal-parameters>) <body>)`
+
+5 Frames and environments:
+
+1. A frame represents an environment by having a parent frame
+2. Frames are Python instances with methods `lookup` and `define`
+
+6 Define expressions:
+
+1. Define binds a symbol to a value in the first frame of the current environment
+2. Procedure definition is shorthand of define with a lambda expression
+3. To apply a user-defined procedure, create a new frame in which formal parameters are bound to argument values, whose parent is the `env` of the procedure
+
+
+
+# Lecture 29 2018/10/31
+
+1 Dynamic scope:
+
+1. The way names are looked up in Python and Scheme is called lexical scope(static scope)
+
+    * Lexical scope: the parent of a frame is the environment in which a procedure is defined
+    * Dynamic scope: the parent of a frame is the environment in which a procedure is called
+
+<br>
+
+2 Tail recursion:
+
+1. Functional programming
+
+    1. Properties:
+        * All functions are pure functions
+        * No reassignment and no mutable data types
+        * Name-value bindings are permanent
+    
+    2. Advantage: 
+        * Value of expression is independent of order of sub-expression evaluation, sub-expression can be evaluated in parallel or in demand(lazily)
+        * Referential transparency: expression value does not change if sub-expression is replaced by its value
+
+2. Iteration: Implementation of Scheme are required to be properly tail-recursive, this allows the execution of an iterative computation in constant space ($\Theta(1)$), even if the iterative computation is described by a syntactically recursive procedure
+
+3. Tail calls:
+    1. A procedure call that has not returned is active, some procedure calls are tail calls. A scheme interpreter should have an unbounded number of tail calls using only a constant amount of space
+    2. A tail call is a call expression in a tail context, for example:
+        * The last body sub-expression in a lambda expression
+        * Sub-expression 2 & sub-expression in a tail context `if` expression, namely, the consequent expression and the alternative expression
+        * All non-predicate sub-expresions in a tail context `cond` expression
+        * The last sub-expression in a tail context `and` or `or`
+        * The last sub-expression in a tail context `begin`
+    3. The return value of the tail call should be the return value of the current procedure call, in this way, tail calls don't increase environment size
+
+
+# Lecture 30 2018/11/02
+
+1 A scheme expression is a scheme list:
+
+1. A scheme expression is a scheme list
+    * Expression: primitive expression and combination
+    * Eval a scheme list of expressions return the value of the expression
+
+<br>
+
+2 Macros:
+
+1. A macro is an operation performed on source code before evaluation that allows you to define special forms
+2. Scheme has a define-macro special form that defines a source code transformation
+3. Evaluation procedure of a macro call expression:
+    1. Evaluate the operator sub-expression, which evaluates to a macro
+    2. Call the macro procedure on the operand expressions withouth evaluating them first
+
+<br>
+
+3 Quasi-quotation
+
+```scheme
+;quotation
+(define b 2)
+'(a b c); The result is (a b c)
+;quasi-quotation
+`(a b c); The result is (a b c)
+`(a ,b c); The result is (a 2 c)
+
+```
