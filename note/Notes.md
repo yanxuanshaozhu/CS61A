@@ -1466,3 +1466,41 @@ catch <Exception Class> as <name>:
 `(a ,b c); The result is (a 2 c)
 
 ```
+
+# Lab 11
+
+1 Two programing languages for an interpreter:
+
+1. The language being interpretered
+2. The underlying implementation language
+
+For Python interpreter, the first is of course Python itself. The most common Python interpreter `CPython` is implemented using C, another popular Python interpreter `PyPy` is written in Python.
+
+2 The REPL
+
+1. Read: The interpreter takes the user input (a string) and passes it through a lexer and parser
+    
+    * The lexer turns the user input string into atomic pieces (tokens) that are like "words" of the implemented language
+    * The parser takes the tokens and organizes them into data structures that the underlying language can understan
+
+2. Eval: Mutual recursion between eval and apply evaluate the expression to obtain a value
+
+    * Eval takes an expression and evaluates it according to the rules of the language. Evaluating a call expression involves calling apply to apply an evaluated operator to its evaluated operands
+    * Apply takes an evaluated operator, i.e., a function, and applies it to the call expression's arguments. Apply may call eval to do more work in the body of the function, so eval and apply are mutually recursive
+
+3. Print: Display the result of evaluating the user input
+
+```
+
+        +-------------------------------- Loop -----------+
+        |                                                 |
+        |  +-------+   +--------+   +-------+   +-------+ |
+Input ---+->| Lexer |-->| Parser |-->| Eval  |-->| Print |-+--> Output
+        |  +-------+   +--------+   +-------+   +-------+ |
+        |                              ^  |               |
+        |                              |  v               |
+        ^                           +-------+             v
+        |                           | Apply |             |
+        |    REPL                   +-------+             |
+        +-------------------------------------------------+
+```
