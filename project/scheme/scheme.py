@@ -73,7 +73,16 @@ def eval_all(expressions, env):
     2
     """
     # BEGIN PROBLEM 7
-    return scheme_eval(expressions.first, env) # replace this with lines of your own code
+    if expressions is nil:
+        return 
+    else:
+         while expressions is not nil:
+            if expressions.rest is nil:
+                return scheme_eval(expressions.first, env)
+            else:
+                scheme_eval(expressions.first, env)
+                expressions = expressions.rest
+    #return scheme_eval(expressions.first, env)  replace this with lines of your own code
     # END PROBLEM 7
 
 ################
@@ -129,6 +138,12 @@ class Frame(object):
             raise SchemeError('Incorrect number of arguments to function call')
         # BEGIN PROBLEM 10
         "*** YOUR CODE HERE ***"
+        frame = Frame(self)
+        frame_formals, frame_vals = formals, vals
+        while frame_formals is not nil:
+            frame.bindings[frame_formals.first] = frame_vals.first
+            frame_formals, frame_vals = frame_formals.rest, frame_vals.rest
+        return frame
         # END PROBLEM 10
 
 ##############
@@ -265,6 +280,8 @@ def do_define_form(expressions, env):
     elif isinstance(target, Pair) and scheme_symbolp(target.first):
         # BEGIN PROBLEM 9
         "*** YOUR CODE HERE ***"
+        env.bindings[target.first] = do_lambda_form(Pair(target.rest, expressions.rest), env)
+        return target.first
         # END PROBLEM 9
     else:
         bad_target = target.first if isinstance(target, Pair) else target
@@ -307,6 +324,7 @@ def do_lambda_form(expressions, env):
     validate_formals(formals)
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
+    return LambdaProcedure(expressions.first, expressions.rest, env)
     # END PROBLEM 8
 
 def do_if_form(expressions, env):
