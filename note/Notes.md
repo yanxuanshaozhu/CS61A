@@ -37,7 +37,7 @@ g = f
 
 <br>
 
-Function name should always be in lowercases.
+Function name should always be in lowercase.
 
 <br>
 
@@ -55,7 +55,7 @@ Docstring Syntax:
 def myfunc(args):
     """ A one-line description of this function.
     General behavior of this function.
-    Description of args. e.g. x -- temperature in centigrades.
+    Description of args. e.g. x -- temperature in centigrade.
     >>> myfunc(m)
     n
     >>> myfunc(n)
@@ -209,7 +209,7 @@ def trace(func):
 def identity(x):
     return x
 
->>>identity(5) # when executing the def statement with  @ <decorator_name> above it, the interpreter will automaticaly run the decorator function
+>>>identity(5) # when executing the def statement with  @ <decorator_name> above it, the interpreter will automatically run the decorator function
 ```
 
 Newton's Method:
@@ -220,11 +220,11 @@ The procedure of Newton's method:
 
 2) update the guess by the relationship: $$x_n = x_{n-1} - \frac{func(x_{n-1})}{d func(x_{n-1})}$$
 
-3) stop the iteration when $$func(x_{n}) = 0$$ or $$|func(x_n) - target| < boundry$$
+3) stop the iteration when $$func(x_{n}) = 0$$ or $$|func(x_n) - target| < boundary$$
 
 ```python
 # The following example calculates the nth root of a number using Newton's Method:
-def nth_root(n, f, df, guess, target, boundry=1e-6):
+def nth_root(n, f, df, guess, target, boundary=1e-6):
     """Calculate the nth root of a number
     
     n -- the nth order
@@ -233,7 +233,7 @@ def nth_root(n, f, df, guess, target, boundry=1e-6):
     guess -- initial guess of the root
     target -- the base of which we want to know the root
     """
-    while abs(f(guess, n, target)) > boundry:
+    while abs(f(guess, n, target)) > boundary:
         guess = guess - f(guess, n, target) / df(guess, 5)
     return guess
 
@@ -333,7 +333,7 @@ The mutual recursive functions can be rewritten into a single recursive function
 Tree recursion: a function calls itself multiple times in the function body
 
 ```python
-# An example: let par(n, m) be the function that calculates the number of differentt partitions of an integer n, requiring each fraction no greater than m
+# An example: let par(n, m) be the function that calculates the number of different partitions of an integer n, requiring each fraction no greater than m
 # In such a case we must have par(n, m) = par(n - m, m) + par(n, m - 1). par(n - m, m) represents the partitions that use m as a fraction while par(n, m - 1) represents the remaining partitions
 ```
 
@@ -406,7 +406,7 @@ This one is quite hard for me, I spent a long time converting iteration to recur
 <ol>
     <li>If you want to preserve several variables through the recursion process, define a helper function with all needed variables as arguments inside the target function.</li>
     <li>If counting from the largest number doesn't work, then try starting from the smallest one.</li>
-    <li>A forluma: term(n, m) = term(n - m, m) + term(n, fun(m))</li>
+    <li>A formula: term(n, m) = term(n - m, m) + term(n, fun(m))</li>
 </ol>
 
 <br>
@@ -555,7 +555,7 @@ Processing container values:
 
 ```python
 sum(iterable [, initial_value]) -> value
-max(iteratble, key = func) -> value # max([func(ele) for ele in iterable])
+max(iteratable, key = func) -> value # max([func(ele) for ele in iterable])
 all(iterable) -> bool # True if the iterable is empty or bool(x) is true for each x in the iterable, False otherwise
 ```
 
@@ -591,7 +591,7 @@ mydate.strftime('%a, %b %d')  # 'Sat Feb 20'  %a means week, %b means month, %d 
 <br>
 
 ```python
-str.swapcase()  # swap lowercases and uppercases in a string
+str.swapcase()  # swap lowercase and uppercase in a string
 ```
 
 <br>
@@ -725,7 +725,7 @@ For iteration over iterables and iterators:
 for _ in iterable:                 # Iteration on iterables can be executed multiple times
     pass
 
-for _ in iterator:                 # Iteration on iterators can be executed only once, otherwise StopIterationErro is caused
+for _ in iterator:                 # Iteration on iterators can be executed only once, otherwise StopIterationError is caused
     pass
 ```
 
@@ -787,7 +787,7 @@ def riffle(deck):
 My intuition: we first make a list of nested lists, each element in the out-layer list is a two-element list, then we reduce the out-layer list to one dimension,
 
 ```python
-	return [item for sublits in [[deck[k], deck[k + len(deck) // 2] for k in range(len(deck) // 2)] for item in sublist] 
+	return [item for sublist in [[deck[k], deck[k + len(deck) // 2] for k in range(len(deck) // 2)] for item in sublist] 
 ```
 
 
@@ -945,7 +945,7 @@ Reason: the for loop uses list indices to record the iteration process, however,
 
 ```python
 """
-Say if you want to delete all zeros in the following list and you wirte codes like this:
+Say if you want to delete all zeros in the following list and you write codes like this:
 """
 ls = [1, 0, 0, 1, 1, 0, 0, 1]
 for item in ls:
@@ -1429,10 +1429,12 @@ catch <Exception Class> as <name>:
     2. A tail call is a call expression in a tail context, for example:
         * The last body sub-expression in a lambda expression
         * Sub-expression 2 & sub-expression in a tail context `if` expression, namely, the consequent expression and the alternative expression
-        * All non-predicate sub-expresions in a tail context `cond` expression
+        * All non-predicate sub-expressions in a tail context `cond` expression
         * The last sub-expression in a tail context `and` or `or`
         * The last sub-expression in a tail context `begin`
     3. The return value of the tail call should be the return value of the current procedure call, in this way, tail calls don't increase environment size
+
+
 
 
 # Lecture 30 2018/11/02
@@ -1451,7 +1453,7 @@ catch <Exception Class> as <name>:
 2. Scheme has a define-macro special form that defines a source code transformation
 3. Evaluation procedure of a macro call expression:
     1. Evaluate the operator sub-expression, which evaluates to a macro
-    2. Call the macro procedure on the operand expressions withouth evaluating them first
+    2. Call the macro procedure on the operand expressions without evaluating them first
 
 <br>
 
@@ -1467,11 +1469,43 @@ catch <Exception Class> as <name>:
 
 ```
 
+
+
+# Lecture 31 2018/11/05
+
+1 Sequence operations: map, filter, reduce
+
+2 Streams are lazy Scheme lists：
+
+1. A stream is a list, but the rest of the list is computed only when needed. If there is error in the rest part, there will be no error report before it is actually computed
+2. Syntax: `cons-stream`, `car`, `cdr-stream`
+
+3 Infinite-streams:
+
+1. An integer stream is a stream of consecutive integer numbers, the rest of the stream is not yet computed when created
+
+4 Higher-order functions:
+
+1. `cons` -> `cons-stream`, `car` -> `car`, `cdr` -> `cdr-stream`
+2. A stream of primes, the "Sieve of Eratosthenes:
+    1. A list: $1, 2, ..., n$
+    2. Let $p = 2$, mark all $k * p$ in the list
+    3. Find the smallest unmarked number in the list, if it exists, let $p$ equal to it and repeat step 2, otherwise stop the procedure
+    4. When the procedure is stopped, the unmarked numbers in the list are all primes 
+
+5 Promises:
+
+1. A promise is an expression along with an environment in which to evaluate it
+2. Delaying an expression creates a promise to evaluate it later in the current environment
+3. Forcing a promise returns its value in the environment in which it is defined
+
+
+
 # Lab 11
 
 1 Two programing languages for an interpreter:
 
-1. The language being interpretered
+1. The language being interpreted
 2. The underlying implementation language
 
 For Python interpreter, the first is of course Python itself. The most common Python interpreter `CPython` is implemented using C, another popular Python interpreter `PyPy` is written in Python.
@@ -1479,9 +1513,9 @@ For Python interpreter, the first is of course Python itself. The most common Py
 2 The REPL
 
 1. Read: The interpreter takes the user input (a string) and passes it through a lexer and parser
-    
+   
     * The lexer turns the user input string into atomic pieces (tokens) that are like "words" of the implemented language
-    * The parser takes the tokens and organizes them into data structures that the underlying language can understan
+    * The parser takes the tokens and organizes them into data structures that the underlying language can understand
 
 2. Eval: Mutual recursion between eval and apply evaluate the expression to obtain a value
 
@@ -1504,3 +1538,111 @@ Input ---+->| Lexer |-->| Parser |-->| Eval  |-->| Print |-+--> Output
         |    REPL                   +-------+             |
         +-------------------------------------------------+
 ```
+
+
+
+# § 4.1 - § 4.2
+
+1 Introduction:
+
+1. A sequence can be represented without each element being stored explicitly in the memory of the computer. The elements can be computed on demand(lazily).
+2. For example, the range container is computed lazily.
+
+2 Iterators: provide sequential access to values
+
+1. Usage: `iter(object)`, `next(iterator)`, `StopIteration` exception, `iter(iterator)` returns itself, not an copy of the iterator
+2. Comparison:
+    * Range: arbitrary element accessible(this is called random access)
+    * Iterator: only the next element is accessible(this is called the sequential access), the class of underlying sequential datasets are broader
+
+3 Iterables: any value that can produce an iterator is called an iterable value, i.e., anything that can be passed in the `iter` function is an iterable
+
+1. For example, tuples, strings, lists iterators are all iterables
+2. If a dictionary adds, removes or modifies its keys, then all existing iterators become invalid
+3. If an object has `__iter__` method, then it is an iterable
+
+4 Streams: apart from iterator, stream is another way to represent sequential data implicitly
+
+1. A stream is a lazily computed list
+2. Like a linked list, a stream has first part and rest part, the rest part is also a stream, but the rest part is computed lazily
+3. Higher-order functions like `map`, `filter` also apply to streams
+
+
+
+# Lecture 32 2018/11/17
+
+1 Databases:
+
+1. A database is a collection of data. A database management system(DBMS) is a software which can be used to manage the data by storing it onto the database and by retrieving and transforming it from the database. Each value stored is called a record, records with similar structure are grouped into tables.
+2. A query is a statement in a query language, and it is used for retrieving and transforming data values. The most common query language now is the structured query language(SQL). SQL is ANSI and ISO standard, but DBMS's implement custom variants
+3. SQL is an example of declarative language where statements do not describe computations directly but describe the result of computations. The database systems use a query interpreter to design and perform a computational process to get the result
+    * Declarative language: a program is a description of the desired result, the interpreter figures out how to generate the result, such as SQL and Prolog
+    * Imperative language: a program is a description of computational processes, the interpreter carries out execution rules, such as Python and Scheme
+
+2 Tables:
+
+1. A table is also called a relation, the columns in a table are named and typed, each row in a table is a record
+2. Create a table using the `select` statement
+
+```sql
+-- SQlite Syntax
+
+-- Create a table with one record
+create <table name> as
+select <value> as <column name>;
+
+-- Create a table with multiple records
+create <table name> as
+select <value> as <column name> union
+select <value> as <column name>;
+```
+
+```sql
+-- MySQL Syntax
+
+--Create a new empty table
+create table if not exists <table name> (
+    <column name>   <column type>);  -- if this column cannot be null, then: <column name> <column type> <not null>
+
+--Insert records into the table
+insert into table <table name> (<column1 name>, <column2 name>) values (<column1 value>, <column2 value>)
+```
+
+3 Select Statements:
+
+1. A select statement defines a new table either by listing values in a single row or by projecting an existing table using `from` clause: `select [column description] from [existing table name]`
+2. Details:
+    * The `[column description]` can be an arithmetic expression on the column
+    * You can rename the the column in the expression: `select [column description] as [new column name]`
+    * Example: `select (distance - 40) as dist_diff from city`
+3. `where` clause: condition
+4. `order by` clause: ordering by a specific column, default order is ascending, you can alter to descending
+```sql
+select <column name> from <table name> order by <column name>        -- Ascending by default
+select <column name> from <table name> order by <column name> asc    -- Explicitly specify ascending order using asc 
+select <column name> from <table name> order by -<column name>       -- Explicitly specify descending order using a minus mark
+select <column name> from <table name> order by <column name> desc   -- Explicitly specify descending order using desc 
+```
+
+
+
+# Lecture 33 2018/11/09
+
+1 Joining tables:
+
+1. The type of join used in this class is cross join, since a table with $m$ rows joins a table with $n$ rows results in a Cartesian product table with $m * n$ rows
+2. Aliases and dot expressions:
+    * Join with overlapping columns: `select A.x, B.y from A, B where A.n = B.m`
+    * If the column names are same in two two tables, use `table_name.column_name` to distinguish
+
+2 Numerical expressions: expressions can contain function calls and arithmetic operators
+
+1. Combine values: `+`, `-`, `*`, `/`, `%`, `and`, `or`
+2. Transform values: `abs`, `round`, `not`,`-`
+3. Compare values: `>`, `>=`, `<`, `<=`, `<>`, `!=`, `=`
+
+3 String expressions:
+
+1. String concatenation using `||`: `'hello, ' || 'world'` => `hello, world` 
+2. `substr(<string name>, <start index>, <length>)`: notice the index starts from 1 not 0 in SQL
+3. `instr(<string name>, <substring name>)`: returns the index by which the substring appears first in the string
