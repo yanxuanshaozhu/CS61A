@@ -1,14 +1,12 @@
 # Lecture 01 2018/08/22
 
-The Zen of Python:
+1 The Zen of Python:
 
 ```python
 import this
 ```
 
-<br>
-
-Different ways for reading files:
+2 Different ways for reading files:
 
 ``` python
 file = open('myFile', 'r')
@@ -22,7 +20,7 @@ words = file.read().decode().split()
 
 # Lecture 02 2018/08/24
 
-The intrinsic name and the bound name of a function:
+1 The intrinsic name and the bound name of a function:
 
 ```python
 def myfunc(args):
@@ -35,21 +33,13 @@ g = f
 
 ```
 
-<br>
+2 Function name should always be in lowercase.
 
-Function name should always be in lowercase.
+3 Don't use tabs, use spaces.
 
-<br>
+4 help(fun_name): enter q to quit help
 
-Don't use tabs, use spaces.
-
-<br>
-
-help(fun_name): enter q to quit help.
-
-<br>
-
-Docstring Syntax:
+5 Docstring Syntax:
 
 ```python
 def myfunc(args):
@@ -68,9 +58,7 @@ def myfunc(args):
 
 # Lab 00
 
-
-
-Test labs and homework using ok in your own computer:
+1 Test labs and homework using ok in your own computer:
 
 ```python
 python ok -q question_function_name --local # test for a specific question.
@@ -84,7 +72,7 @@ Notice: only the latest version(currently the ok for 2020 Fall class and 2021 Sp
 
 # HW 01
 
-Answer for the Quine question:
+1 Answer for the Quine question:
 
 ```python
 quline = 'print("quline = " + repr(quline) + ";eval(quline)")';eval(quline)
@@ -98,11 +86,9 @@ The built-in `repr` function, which returns an expression that evaluates to its 
 
 # Lecture 03 2018/08/27
 
-If not short-circuiting, `and` and `or` Boolean operator returns the last expression they evaluate.
+1 If not short-circuiting, `and` and `or` Boolean operator returns the last expression they evaluate.
 
-<br>
-
-Some examples for  including  `1/0(ZeroDivisionError)`in the Boolean expressions:
+2 Some examples for  including  `1/0(ZeroDivisionError)`in the Boolean expressions:
 
 ```python
 True and 1/0  # No short-circuiting, so the result is ZeroDivisionError
@@ -113,9 +99,7 @@ False or 1/0 # No short-circuiting, so the result is ZeroDivisionError
 1/0 and/or True/False  # The left expression will cause an error, so the result is ZeroDivisionError
 ```
 
-<br>
-
- Debugging Methods:
+3  Debugging Methods:
 
 1) Running doctests for codes in a file:
 
@@ -139,27 +123,21 @@ run_docstring_examples(function_name, globals(), True) # test for tests in the d
 
 # Lab 01
 
-Assertion statement should be included in a release version of your codes, but debugging print statement should not.
+1 Assertion statement should be included in a release version of your codes, but debugging print statement should not.
 
-<br>
+2 Traceback Message: `File <file_name> line <line_number> in <function>`
 
-Traceback Message: `File <file_name> line <line_number> in <function>`
+3 Error Message: `<error type> : <error message>`
 
-Error Message: `<error type> : <error message>`
+4 Common Error Types: SyntaxError, IndentationError, TypeError, ZeroDivisionError, NameError, IndexError
 
-<br>
-
-Common Error Types: SyntaxError, IndentationError, TypeError, ZeroDivisionError, NameError, IndexError
-
-<br>
-
-Common Bugs: spelling, missing parentheses, missing close quotes, == v.s. =, infinite loops, off-by-one errors(boundary condition error)
+5 Common Bugs: spelling, missing parentheses, missing close quotes, == v.s. =, infinite loops, off-by-one errors(boundary condition error)
 
 
 
 # Lecture 04 2018/08/29
 
-Notice the following tuple assignment:
+1 Notice the following tuple assignment:
 
 ```python
 def func(n,term):
@@ -171,7 +149,7 @@ def func(n,term):
 
 ```
 
-Currying(so-called 柯里化 in Chinese): use high-order function to convert functions with multiple arguments into a chin of functions(in some languages like Haskell a function can have at most one argument ):
+2 Currying(so-called 柯里化 in Chinese): use high-order function to convert functions with multiple arguments into a chin of functions(in some languages like Haskell a function can have at most one argument ):
 
 ```python
 # Use g(x)(y) to represent f(x,y)
@@ -181,7 +159,7 @@ def g(x):
     return h
 ```
 
-Lambda expression :
+3 Lambda expression :
 
 ```python
 # An example: the three ways return the identical result
@@ -197,7 +175,7 @@ f(12) # return 169
 (lambda f,g: lambda x: f(g(x)))(lambda x: x ** 2, lambda y: y + 1)(12) # return 169
 ```
 
-Decorator: apply a higher-order function as part of executing a def statement:
+4 Decorator: apply a higher-order function as part of executing a def statement:
 
 ```python
 def trace(func):
@@ -212,7 +190,7 @@ def identity(x):
 >>>identity(5) # when executing the def statement with  @ <decorator_name> above it, the interpreter will automatically run the decorator function
 ```
 
-Newton's Method:
+5 Newton's Method:
 
 The procedure of Newton's method:
 
@@ -263,11 +241,13 @@ def df1(x, n):
 
 # Project 01 Hog
 
+1 Randint
+
 ```python
 randint(a,b) # a <= x <= b
 ```
 
-Nonlocal variable: a variable declared in the outer function but can be modified in the inner function 
+2 Nonlocal variable: a variable declared in the outer function but can be modified in the inner function 
 
 ```python
 def f1():
@@ -279,6 +259,7 @@ def f1():
     return x
 print(f1())    # 6
 ```
+3 Sort
 
 ```python
 ls.sort(key = lambda x: x[0],reverse = True)  # Default ascending
@@ -294,7 +275,7 @@ print(min(rs))
 
 # Lecture 05 2018/08/31
 
-How to draw an environment diagram:
+1 How to draw an environment diagram:
 
 1) when defines an function:
 
@@ -314,32 +295,26 @@ fn: <fun_name>   --------------------> func <fun_name>(<formal_parameters>)[pare
 
 # Lecture 06 2018/09/03
 
-Self-reference: a function that refers to itself in the function body is called self-reference
+1 Self-reference: a function that refers to itself in the function body is called self-reference
 
 
 
 # Lecture 07 2018/09/05
 
-Recursive function: can be divided into a base case and recursive function calls
+1 Recursive function: can be divided into a base case and recursive function calls
 
-<br>
-
-Mutual recursion:  if a recursive procedure can be divided into two functions that call each other, then the two functions are mutual recursive.
+2 Mutual recursion:  if a recursive procedure can be divided into two functions that call each other, then the two functions are mutual recursive.
 
 The mutual recursive functions can be rewritten into a single recursive function. Say if you use two functions to represent the even and odd cases respectively, you can then replace them using one function that uses a step of two.
 
-<br>
-
-Tree recursion: a function calls itself multiple times in the function body
+3 Tree recursion: a function calls itself multiple times in the function body
 
 ```python
 # An example: let par(n, m) be the function that calculates the number of different partitions of an integer n, requiring each fraction no greater than m
 # In such a case we must have par(n, m) = par(n - m, m) + par(n, m - 1). par(n - m, m) represents the partitions that use m as a fraction while par(n, m - 1) represents the remaining partitions
 ```
 
-<br>
-
-The Luhn algorithm: used for the credit card number checker. 
+4 The Luhn algorithm: used for the credit card number checker. 
 
 The credit card number consists of two parts: the ordinary digits and the check digit at last. For example,if the account number is "7992739871" and the check number is X, then the full account number is "7992739871X". The Luhn algorithm is used to calculate what the number X is.
 
@@ -359,11 +334,9 @@ A simple way to verify whether the check_digit is correct:  if `(sum_results + c
 
 # Lecture 08 2018/09/07
 
-Functional abstractions: concrete implementations do not matter in this situation.
+1 Functional abstractions: concrete implementations do not matter in this situation.
 
-<br>
-
-Choosing names:
+2 Choosing names:
 
 <ul>
     <li> Names should convey the meaning or purpose of the values to which they're bound</li>
@@ -371,10 +344,7 @@ Choosing names:
     <li> Names can be long if they help to document your code</li>
     <li> Names can be short if they represent generic quantities</li>
 </ul>
-
-<br>
-
-Test-driven development:
+3 Test-driven development:
 
 <ul> 
     <li> Write test for functions before you actually implementing the function itself</li>
@@ -385,33 +355,27 @@ Test-driven development:
 
 # Lecture 09 2018/09/12
 
-Different ways to implementations recursive functions:
+1 Different ways to implementations recursive functions:
 
 <ul>
     <li> If multiple implementations of a function are equally clear, then you should choose the shorter one </li>
     <li> If the longer one is more clear, then you should use it</li>
     <li> Sometimes the base case is omitted so the function implementations are shorter, however, the function is still recursive in these cases</li>
 </ul>
-
-<br>
-
-If you store every intermediate value during the recursion process, then it is pretty slow compared with Iteration.
+2 If you store every intermediate value during the recursion process, then it is pretty slow compared with Iteration.
 
 
 
 # HW 02
 
-This one is quite hard for me, I spent a long time converting iteration to recursion for the ping pong question and the count coins question. At first there were duplicate results in my recursion formula and I checked for a while, also I turned to the hint videos on the website for inspiration.  I learnt several lessons from these two problems:
+1 This one is quite hard for me, I spent a long time converting iteration to recursion for the ping pong question and the count coins question. At first there were duplicate results in my recursion formula and I checked for a while, also I turned to the hint videos on the website for inspiration.  I learnt several lessons from these two problems:
 
 <ol>
     <li>If you want to preserve several variables through the recursion process, define a helper function with all needed variables as arguments inside the target function.</li>
     <li>If counting from the largest number doesn't work, then try starting from the smallest one.</li>
     <li>A formula: term(n, m) = term(n - m, m) + term(n, fun(m))</li>
 </ol>
-
-<br>
-
-The recursive lambda:
+2 The recursive lambda:
 
 ```python
 lambda func: lambda args: func(func,args)             # This is a general form for recursive lambda, the func is a two-argument recursive function
@@ -422,11 +386,9 @@ lambda func: lambda args: func(func,args)             # This is a general form f
 
 # Lecture 10 2018/09/14
 
-Each value in Python has a class that determines the type of the value, values share class and behavior.
+1 Each value in Python has a class that determines the type of the value, values share class and behavior.
 
-<br>
-
-Native data types:
+2 Native data types:
 
 * Properties:
     * literals: expressions that evaluate to values of native data types
@@ -435,21 +397,17 @@ Native data types:
     * numeric types: int (integers), float (real numbers), complex (complex numbers)
     * no-numeric types: bool (True / False), the majority of no-numeric data types cannot be described in native data types
 
-<br>
-
-Data abstraction: separate segments of programs that deal with how data are represented from segments of programs that deal with how data are manipulated
+3 Data abstraction: separate segments of programs that deal with how data are represented from segments of programs that deal with how data are manipulated
 
 Function abstraction: separate how function is implemented and how function is used
 
-<br>
-
-Abstraction barrier: lower-layer functions are invisible to function users, they only access higher-layer functions, the higher-layer functions can interact with the lower-layer functions. In such a way, how data is actually implemented, how lower-layer function is defined (like selector/ constructor  e.g., get/set, constructor in Java) don't affect the behavior of the data types/ functions.
+4 Abstraction barrier: lower-layer functions are invisible to function users, they only access higher-layer functions, the higher-layer functions can interact with the lower-layer functions. In such a way, how data is actually implemented, how lower-layer function is defined (like selector/ constructor  e.g., get/set, constructor in Java) don't affect the behavior of the data types/ functions.
 
 
 
 # Lecture 11 2018/09/17
 
-Sequence: an ordered collection of values, there are different types of sequences, but they share common behaviors.
+1 Sequence: an ordered collection of values, there are different types of sequences, but they share common behaviors.
 
 * Properties: finite length, an empty sequence has 0 length
 * Indexing: starting from 0
@@ -483,7 +441,7 @@ reduce_list = reduce(func, ls)  # The initial value for reduce function can be o
 
 # Lab 04
 
-I stuck at question 5 for some time, so I put the question here:
+1 I stuck at question 5 for some time, so I put the question here:
 
 A subsequence of a number is a series of (not necessarily contiguous) digits of the number. For example, 12345 has subsequences that include 123, 234, 124, 245, etc. Your task is to get the maximum subsequence below a certain length.
 
@@ -545,13 +503,11 @@ def max_subseq(n, t):
 
 # Lecture 12 2018/09/19
 
-Box- and-pointer notation: a way to represent lists in the environment diagrams
+1 Box- and-pointer notation: a way to represent lists in the environment diagrams
 
 It's a series of adjacent boxes with two parts in each box, the first part is an index, the second is a value for this box or a pointer pointing to another box or pointing to a function.
 
-<br>
-
-Processing container values:
+2 Processing container values:
 
 ```python
 sum(iterable [, initial_value]) -> value
@@ -559,28 +515,20 @@ max(iteratable, key = func) -> value # max([func(ele) for ele in iterable])
 all(iterable) -> bool # True if the iterable is empty or bool(x) is true for each x in the iterable, False otherwise
 ```
 
-<br>
-
-Trees abstraction:
+3 Trees abstraction:
 
 * Recursive definition: a root label and a list of branches, each branch is a tree; a tree with no branch is called a leaf
 * Relative definition: each location in a tree is a node, each node has a label that can be any value; one node can be parent/child of another
 
-<br>
+4 Sum of nested list: return a list, the element of which is the sum of the elements of the original list at that place
 
-Sum of nested list: return a list, the element of which is the sum of the elements of the original list at that place
-
-<br>
-
-Functions that take trees as inputs/outputs are often tree-recursive themselves
+5 Functions that take trees as inputs/outputs are often tree-recursive themselves
 
 
 
 #  Lecture 13 2018/09/21
 
-Objects combine data and behavior, objects represent information, but also behave like the things they represent.
-
-<br>
+1 Objects combine data and behavior, objects represent information, but also behave like the things they represent.
 
 ```python
 from datetime import date
@@ -588,15 +536,13 @@ mydate = date(22021,2,20)
 mydate.strftime('%a, %b %d')  # 'Sat Feb 20'  %a means week, %b means month, %d means day
 ```
 
-<br>
+2 Swapcase of a string
 
 ```python
 str.swapcase()  # swap lowercase and uppercase in a string
 ```
 
-<br>
-
-Identity operator and equality operator:
+3 Identity operator and equality operator:
 
 ```python
 a is b # True is a and b points to the same object
@@ -608,7 +554,7 @@ a == b # True if the pointed objects have the same value
 
 # Lecture 14 2018/09/24
 
-Motivation: Sometimes we want to maintain some state within a function. For example, if we define a function called `withdraw(amount)` to withdraw  a certain amount of money from the bank,  the function returns the remaining balance in your account. We then want to maintain the balance within the function, which means if we call the function multiple times with the same amount parameter, we should have different returning values. 
+1 Motivation: Sometimes we want to maintain some state within a function. For example, if we define a function called `withdraw(amount)` to withdraw  a certain amount of money from the bank,  the function returns the remaining balance in your account. We then want to maintain the balance within the function, which means if we call the function multiple times with the same amount parameter, we should have different returning values. 
 
 There are two different ways to tackle this problem:
 
@@ -638,13 +584,9 @@ def withdraw_account(balance):
     return withdraw
 ```
 
-<br>
+2 If you use nonlocal statement for a variable, then it must be bound in the first non-local parent frame of the current frame.
 
-If you use nonlocal statement for a variable, then it must be bound in the first non-local parent frame of the current frame.
-
-<br>
-
-Python pre-computes which frame contains which names before executing the function body. Within a function body, all instances of a name must refer to the same frame.
+3 Python pre-computes which frame contains which names before executing the function body. Within a function body, all instances of a name must refer to the same frame.
 
 ```python
 def withdraw_account(balance):
@@ -659,13 +601,9 @@ def withdraw_account(balance):
 
 In the above example, if we omit the nonlocal statement, it will cause a UnboundLocalError, because within the body of function withdraw, the local variable `balance` is referenced before assignment.
 
-<br>
+4 Referential transparency: if an expression can be replaced by its value without changing the meaning of a program, then the expression is called referential transparent.
 
-Referential transparency: if an expression can be replaced by its value without changing the meaning of a program, then the expression is called referential transparent.
-
-<br>
-
-An example of nonlocal statement:
+5 An example of nonlocal statement:
 
 ```python
 def f(x):
@@ -686,22 +624,17 @@ total = b(3) + b(4) # 22, b(3) == 10, b(4) == 12
 
 # Lecture 15 2018/09/26
 
-Iterators:
+1 Iterators:
 
 1. An container can provide and iterator that provides access to its elements in some order
-
 2. Some related functions:
     2.1. iter(iterable): returns an iterator
-
-  2.2. next(iterator): returns the next element in the iterator
-
-  2.3. list(iterator): list the unvisited elements in the iterator. If listed, then an iterator cannot be used again, otherwise an StopIterationError will be caused
+    2.2. next(iterator): returns the next element in the iterator
+    2.3. list(iterator): list the unvisited elements in the iterator. If listed, then an iterator cannot be used again, otherwise an StopIterationError will be caused
 
 3. Iterators are mutable objects
 
-<br>
-
-Dictionary iteration:
+2 Dictionary iteration:
 
 1. The values, keys and items of a dictionary are all iterable. For Python version 3.6 and higher, the iteration order is the order by which items are added into the dictionary, for Python version 3.5 or lower, the iteration order is arbitrary.
 2. If the size of the dictionary is changed during iteration(you add something into the dictionary or you pop something during iteration), an RuntimeError will be caused. For lists,  you can do whatever you want to the list during iteration.
@@ -717,9 +650,7 @@ for key in d.copy():
         d.pop(key)
 ```
 
-<br>
-
-For iteration over iterables and iterators:
+3 For iteration over iterables and iterators:
 
 ```python
 for _ in iterable:                 # Iteration on iterables can be executed multiple times
@@ -729,9 +660,7 @@ for _ in iterator:                 # Iteration on iterators can be executed only
     pass
 ```
 
-<br>
-
-Built-in iterator functions:
+4 Built-in iterator functions:
 
 1. Many operations on sequences return iterators that compute results lazily, lazy computation means result is only computed when needed
 
@@ -745,9 +674,7 @@ Built-in iterator functions:
 
     2.4 reserved(seq)
 
-<br>
-
-Generators:
+5 Generators:
 
 1. Generators are special iterators that they are results of generator functions
 2. A generator function uses yield statements to replace the return statement, all yield statements can be executed and related values can be returned
@@ -764,7 +691,7 @@ yield from iterable
 
 # Lab 05
 
-Q9: Riffle Shuffle
+1 Q9: Riffle Shuffle
 
 The familiar [riffle shuffle](https://fredhohman.com/card-shuffling/static/images/riffle.gif) of a deck of cards (or in our case, of a sequence of things) results in a new configuration of cards in which the top card is followed by the middle card, then by the second card, then the card after the middle, and so forth. Assuming the deck (sequence) contains an even number of cards, write a list comprehension that produces the shuffled sequence.
 
@@ -790,8 +717,6 @@ My intuition: we first make a list of nested lists, each element in the out-laye
 	return [item for sublist in [[deck[k], deck[k + len(deck) // 2] for k in range(len(deck) // 2)] for item in sublist] 
 ```
 
-
-
 Another solution following the hint: for odd position, the index needs to plus `len(deck) // 2`, for even position, the index is just `k`, so we simply use `k % 2` to separate the indices,
 
 ```python
@@ -802,7 +727,7 @@ Another solution following the hint: for odd position, the index needs to plus `
 
 # Lab 06
 
-Q4: Insert Items
+1 Q4: Insert Items
 
 Write a function which takes in a list `lst`, an argument `entry`, and another argument `elem`. This function will check through each item present in `lst` to see if it is equivalent with `entry`. Upon finding an equivalent entry, the function should modify the list by placing `elem` into the list right after the found entry. At the end of the function, the modified list should be returned. See the doctests for examples on how this function is utilized. Use list mutation to modify the original list, no new lists should be created or returned.
 
@@ -866,14 +791,10 @@ def insert_items(lst, entry, elem):
 2. creating an instance of a class is also called instancing the class
 3. attributes associated with instances are also called instance attributed, fields, properties and instance variables, function attributes are also called methods
 
-<br>
-
 2 Dual roles of object in the `object.method` expression:
 
 1.  the object means the method is not in the global environment, but inside the local environment of a class
 2.  the object is bound to the first argument `self` in the method
-
-<br>
 
 3 Functions and methods:
 
@@ -883,8 +804,6 @@ type(instance_name.func_name(arguments))               # <class 'method'>
 ```
 
 Notice that when calling a method using a Class object, we need to explicitly specify the object that is bound to the `self` argument in the method, but when calling a method using an instance, we don't need to do that.
-
-<br>
 
 4 Class attributes:
 
@@ -911,23 +830,17 @@ this code creates a class attribute and assigns a value to it, it affects all in
 
 # Lecture 17 2018/10/01
 
-1 Terminologies: parent class/ base class/ superclass                            subclass
-
-<br>
+1 Terminologies: parent class/ base class/ superclass/ subclass
 
 2 Interfaces:
 
 1. Def: a collection of attributes and conditions on those attributes
 2. In Java, you need to explicitly declare an interface, however, in Python, Ruby and Go, an object with the appropriate name implements an interface already
 
-<br>
-
 3 Multiple inheritances:
 
 1. Order: from bottom to top, from left to right in the same layer(the left-to-right order is the same as the order written in the class arguments)
 2. The algorithm is called the C3 Resolution Ordering
-
-<br>
 
 4 Object-oriented design principles:
 
@@ -939,7 +852,7 @@ this code creates a class attribute and assigns a value to it, it affects all in
 
 # Lab 07
 
-Don't modify a list while iterating on it using for loop, it may result in wrong results, particularly, don't remove elements during iteration.
+1 Don't modify a list while iterating on it using for loop, it may result in wrong results, particularly, don't remove elements during iteration.
 
 Reason: the for loop uses list indices to record the iteration process, however, deleting items in the list results in mismatch of the current list with the original indices.
 
@@ -1012,8 +925,6 @@ for item in ls[:]:
 1. Can accept values of multiple types
 2.  Three implementing techniques: shared interfaces, type dispatching and type coercion
 
-<br>
-
 2 String conversion:
 
 1. Python has two ways of string representation:
@@ -1026,8 +937,6 @@ for item in ls[:]:
     1. The `str(object)` invokes `object.__str__()` , it is used in the `print(object)`
     2. The `repr(object)` invokes `object.__repr__()`, it is used in the interactive session
     3. If we explicitly overwrite the `__str__()` and the `__repr__()` in our class, then instances of our class have string representation 
-
-<br>
 
 3 Special Methods:
 
@@ -1047,8 +956,6 @@ for item in ls[:]:
         ```
 
 5. `__call__()`: allows objects to behave like higher-order function
-
-<br>
 
 4 Three ways to implement generic function:
 
@@ -1129,8 +1036,6 @@ for item in ls[:]:
 2. Empty linked list: no first element, no rest of the list
 3. A linked list is a sequence, it has finite length and supports element selection
 
-<br>
-
 2 Tree:
 
 1. Definition: a label + branches; each branch is also a tree
@@ -1198,15 +1103,11 @@ Lecture 24 is Alan Kay's presentation on the history of programming language and
 
 1 Interpreter: a program that carries out evaluation and execution procedures
 
-<br>
-
 2 Programming Language:
 
 1. PLs vary widely in syntactic structures, features and domain of application
 2. A powerful PL can exist without object system, higher-order function, assignment or even control structures
 3. The part of Scheme discussed in this class is limited into topics like expressions but not statements, symbolic computations and mutable values
-
-<br>
 
 3 Functional Programming
 
@@ -1278,8 +1179,6 @@ Lecture 24 is Alan Kay's presentation on the history of programming language and
 2. `<p1> ... <pn>` are predicates that can be evaluated to be `#t` or `#f`, `<e1> ... <en>` are expressions that could be executed
 3. If `<p1> ... <pk-1>` are all `#f` and `<pk>` is `#t`, then `<ek>` is executed and the `cond` expression terminates  here
 
-<br>
-
 2 Selecting elements from a list:
 
 1. The `car` operator selects the first element in the list
@@ -1316,8 +1215,6 @@ try:
 catch <Exception Class> as <name>:
     pass
 ```
-
-<br>
 
 5 Exception objects:
 
@@ -1362,23 +1259,17 @@ catch <Exception Class> as <name>:
 3. procedure application
 4. eval/apply recursion
 
-<br>
-
 2 Logical special forms: only evaluate some sub-expressions
 
 1. `If` expression
 2. `And` or `or`
 3. `Cond` expression
 
-<br>
-
 3 Quotation:
 
 1. Definition: the `quote` special form evaluates to the quoted expression, which is not evaluated
 2. Syntax: `(quote <expression>)`
 3. `'<expression>` is shorthand for `(quote <expression>)`
-2.
-<br>
 
 4 Lambda expression:
 
@@ -1406,8 +1297,6 @@ catch <Exception Class> as <name>:
 
     * Lexical scope: the parent of a frame is the environment in which a procedure is defined
     * Dynamic scope: the parent of a frame is the environment in which a procedure is called
-
-<br>
 
 2 Tail recursion:
 
@@ -1445,8 +1334,6 @@ catch <Exception Class> as <name>:
     * Expression: primitive expression and combination
     * Eval a scheme list of expressions return the value of the expression
 
-<br>
-
 2 Macros:
 
 1. A macro is an operation performed on source code before evaluation that allows you to define special forms
@@ -1454,8 +1341,6 @@ catch <Exception Class> as <name>:
 3. Evaluation procedure of a macro call expression:
     1. Evaluate the operator sub-expression, which evaluates to a macro
     2. Call the macro procedure on the operand expressions without evaluating them first
-
-<br>
 
 3 Quasi-quotation
 
@@ -1646,3 +1531,78 @@ select <column name> from <table name> order by <column name> desc   -- Explicit
 1. String concatenation using `||`: `'hello, ' || 'world'` => `hello, world` 
 2. `substr(<string name>, <start index>, <length>)`: notice the index starts from 1 not 0 in SQL
 3. `instr(<string name>, <substring name>)`: returns the index by which the substring appears first in the string
+
+
+
+# Lecture 34 2018/10/14
+
+1 Aggregation and grouping:
+
+1. Aggregate functions: `max`, `min`, `sum`, `count`
+    * In the class, the professor says in the situation where we want to count unique values in a column, we should use `count(distinct <column name>)` instead of `count(*)`
+    * `count(1)`: ignores all columns in the table and counts a new column with all elements equal to 1, doesn't ignore `null` value, the result is the number of rows in the table
+    * `count(*)`: takes all columns in the table into consideration, doesn't ignore `null` values, the result is the number of rows in the table
+    * `count(<column name>)`: takes only one column into consideration, ignores `null` values in the column
+    * if the <column name> is the primary key in the table , then `count(<column name>)` is the fastest, otherwise `count(1)` is the fastest
+2. You can put aggregate functions and ordinary columns in one `select` statement, but the result may not be meaningful.
+3. Grouping records: `group by`, `having` 
+    * `group by <column name>`: partition the table into groups using a specific group or groups
+    * `having <condition>`: filter in each group
+    * Firstly you use `where` to filter the whole table, then you use `group by` to partition the filtered table into groups, after that `having` is executed on each group to do further filtration
+    * Aggregate function is executed for each group if there is a `group by` clause
+
+2 Select grammar:
+
+1. You can refer to this link :https://sqlite.org/lang_select.html
+2. Order of execution: `with(comma-separated tables)` => `select(distinct/all/ ...)` => `from(table/ sub-query)` => `where(condition)` => `group by(column names)` => `having(column names)` => `values(comma-separated values)` => `order by(column names)` => `limit(number)` => `offset(number)`
+    * You can use values to inject values into a table, you can also use select to inject values, but there is a restriction called `SQLITE_LIMIT_COMPOUND_SELECT` limiting the maximum number of terms in a select statement
+
+
+
+# Lecture 35 2018/11/19
+
+1 Create tables and drop table:
+
+1. Create statement usage: `create table if not exists <table name> (column definitions);`
+    * Column definition: `<column name> <column type> <column constraints>`; <column constraints> like `<not null>`, `<primary key>`, `<unique>`, `<default default-values>`
+    * Check tables in the current database: 
+    ```sql
+    -- SQlite3
+    .tables
+
+    -- MySQL
+    show tables;
+    ```
+    * Show table definition:
+    ```sql
+    -- SQlite3
+    .schema <table name>
+    -- MySQL
+    show create table <table name>;
+    ```
+2. Drop statement usage: `drop it exists <table name>`
+
+2 Modify tables
+
+1. Insert statement usage: `insert <replace> into table (column names) values (expressions)`
+    * If insert into all columns, the `(column names)` can be omitted
+    * Insert into multiple rows: `values (row1), (row2), ..., (rownn)`
+2. Update statement usage: `update table <table name> set <column name> = <expression> where <condition>`
+    * Set the intersection of rows specified in where clause and column name clause equal to expression
+3. Delete statement usage: `delete from table <table name> where <condition>`
+    * If there is no where clause, the all rows in the table are deleted. Notice in this situation, the records in the table are deleted but the table itself still exists, which is different from the drop statement where the whole table together with all records is deleted
+
+3 Python and SQL
+```python
+import sqlite3
+
+db = sqlite3.Connection('filename.db')
+db.execute('create table nums(value int not null);')
+# db.execute('insert into nums values(1), (2);')
+db.execute('insert into nums values (?), (?);', range(1,3))  
+db.execute('select * from nums;')
+db.commit()
+```
+
+4 SQL injection attack: it's better to use template and Python object to avoid SQL injection attack
+
