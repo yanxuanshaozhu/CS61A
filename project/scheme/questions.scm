@@ -13,7 +13,11 @@
 ;; Returns a list of two-element lists
 (define (enumerate s)
   ; BEGIN PROBLEM 15
-  'replace-this-line
+  (define (enumerate_helper s index) 
+      (if (null? s) nil
+          (cons (list index (car s))
+                (enumerate_helper (cdr s) (+ index 1)))))
+  (enumerate_helper s 0)
   )
   ; END PROBLEM 15
 
@@ -23,7 +27,10 @@
 ;; the merged lists.
 (define (merge comp list1 list2)
   ; BEGIN PROBLEM 16
-  'replace-this-line
+  (cond ((null? list1) list2)
+      ((null? list2) list1)
+      ((comp (car list1) (car list2)) (cons (car list1) (merge comp (cdr list1) list2)))
+      (else (cons (car list2) (merge comp list1 (cdr list2)))))
   )
   ; END PROBLEM 16
 

@@ -213,6 +213,7 @@ class LambdaProcedure(Procedure):
         of values, for a lexically-scoped call evaluated in environment ENV."""
         # BEGIN PROBLEM 11
         "*** YOUR CODE HERE ***"
+        return self.env.make_child_frame(self.formals, args)
         # END PROBLEM 11
 
     def __str__(self):
@@ -357,6 +358,14 @@ def do_and_form(expressions, env):
     """
     # BEGIN PROBLEM 12
     "*** YOUR CODE HERE ***"
+    if expressions is nil:
+        return True
+    if expressions.rest is nil:
+        return scheme_eval(expressions.first, env)
+    val = scheme_eval(expressions.first, env)
+    if is_false_primitive(val):
+        return False
+    return do_and_form(expressions.rest, env)
     # END PROBLEM 12
 
 def do_or_form(expressions, env):
@@ -374,6 +383,14 @@ def do_or_form(expressions, env):
     """
     # BEGIN PROBLEM 12
     "*** YOUR CODE HERE ***"
+    if expressions is nil:
+        return False
+    if expressions.rest is nil:
+        return scheme_eval(expressions.first, env)
+    val = scheme_eval(expressions.first, env)
+    if is_true_primitive(val):
+        return val
+    return do_or_form(expressions.rest, env)
     # END PROBLEM 12
 
 def do_cond_form(expressions, env):
@@ -394,6 +411,9 @@ def do_cond_form(expressions, env):
         if is_true_primitive(test):
             # BEGIN PROBLEM 13
             "*** YOUR CODE HERE ***"
+            if clause.rest is nil:
+                return test
+            return eval_all(clause.rest, env)
             # END PROBLEM 13
         expressions = expressions.rest
 
@@ -418,6 +438,12 @@ def make_let_frame(bindings, env):
     names, values = nil, nil
     # BEGIN PROBLEM 14
     "*** YOUR CODE HERE ***"
+    while bindings:
+        validate_form(bindings.first, 2, 2)
+        names = Pair(bindings.first.first, names)
+        values = Pair(scheme_eval(bindings.first.rest.first, env), values)
+        bindings = bindings.rest
+    validate_formals(names)
     # END PROBLEM 14
     return env.make_child_frame(names, values)
 
