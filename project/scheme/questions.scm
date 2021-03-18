@@ -6,8 +6,12 @@
 ; Some utility functions that you may find useful to implement
 
 (define (zip pairs)
-  'replace-this-line)
-
+  (if (null? pairs) '(()())
+    (let ((first (car pairs)) (rest (zip (cdr pairs))))
+      (list (cons (car first) (car rest)) (cons (cadr first) (cadr rest)))
+    )
+  )
+)
 
 ;; Problem 15
 ;; Returns a list of two-element lists
@@ -44,8 +48,16 @@
 
 (define (nondecreaselist s)
     ; BEGIN PROBLEM 17
-    'replace-this-line
+    (cond 
+        ((equal? (cdr s) nil) (cons s nil))
+        ((> (car s) (cadr s)) 
+            (cons (cons (car s) nil) (nondecreaselist (cdr s))))
+        (else
+            (cons (cons (car s) (car (nondecreaselist (cdr s)))) (cdr (nondecreaselist (cdr s))))
+        )
     )
+)
+  
     ; END PROBLEM 17
 
 ;; Problem EC
@@ -62,12 +74,12 @@
 (define (let-to-lambda expr)
   (cond ((atom? expr)
          ; BEGIN PROBLEM EC
-         'replace-this-line
+         expr
          ; END PROBLEM EC
          )
         ((quoted? expr)
          ; BEGIN PROBLEM EC
-         'replace-this-line
+         expr
          ; END PROBLEM EC
          )
         ((or (lambda? expr)
@@ -76,19 +88,18 @@
                (params (cadr expr))
                (body   (cddr expr)))
            ; BEGIN PROBLEM EC
-           'replace-this-line
+            (append (list form params) (map let-to-lambda body))
            ; END PROBLEM EC
            ))
         ((let? expr)
          (let ((values (cadr expr))
                (body   (cddr expr)))
            ; BEGIN PROBLEM EC
-           'replace-this-line
+           (cons (append (list 'lambda (car (zip values))) (map let-to-lambda body)) (map let-to-lambda (cadr (zip values))))
            ; END PROBLEM EC
            ))
         (else
          ; BEGIN PROBLEM EC
-         'replace-this-line
+         (map let-to-lambda expr)
          ; END PROBLEM EC
          )))
-
