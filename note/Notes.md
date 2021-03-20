@@ -1454,7 +1454,7 @@ Input ---+->| Lexer |-->| Parser |-->| Eval  |-->| Print |-+--> Output
 
 
 
-# Lecture 32 2018/11/17
+# Lecture 32 2018/11/07
 
 1 Databases:
 
@@ -1507,6 +1507,30 @@ select <column name> from <table name> order by <column name>        -- Ascendin
 select <column name> from <table name> order by <column name> asc    -- Explicitly specify ascending order using asc 
 select <column name> from <table name> order by -<column name>       -- Explicitly specify descending order using a minus mark
 select <column name> from <table name> order by <column name> desc   -- Explicitly specify descending order using desc 
+```
+
+
+
+# HW 08
+
+ 1 How many times `scheme_eval` and `scheme_apply` are called in the Scheme interpreter.
+
+```scheme
+(+ 2 3 (- 4 5) 1) 
+; scheme_eval
+;1:	(+ 2 3 (- 4 5) 1) 
+;2:	+
+;3:	2
+;4:	3
+;5:  (- 4 5)
+;6:	-
+;7:	4
+;8: 5
+;9: 1   So scheme_eval is called for nine times
+
+; scheme_apply
+;1: (- 4 5)
+;2: (+ 2 3 -1 1)
 ```
 
 
@@ -1605,4 +1629,47 @@ db.commit()
 ```
 
 4 SQL injection attack: it's better to use template and Python object to avoid SQL injection attack
+
+
+
+# Lecture 36 2018/11/26
+
+1 Language ambiguity: natural languages have ambiguity, say the part of speech can be ambiguous, but there is no ambiguity in a programming language
+
+2 Syntax trees: a tree represents a phrase, a leaf represents a word
+
+3 Context-free grammar rules: 
+
+1. A grammar rule describes how a tag can be expanded into a sequence of tags or words
+2. Examples: `(N, cow)`, `(V, cow)`, the former one refers to the noun cow, while the latter one refers to the verb cow
+
+4 Parsing: a parser takes in sentences and outputs syntax structures, a parser is similar to a syntax generator
+
+5 Learning: since not all trees are equally common, you can score a tree using relative frequencies
+
+6 Translation: natural language parsing can be used in translation, which may include syntactic reordering
+
+
+
+# Lecture 37 2018/11/28
+1 Trees
+
+1. Tree-structured data: label + branches -> a tree
+2. You can define ADT using functions alone, or you can use a class to do so
+3. BTree: binary tree
+
+2 Tree processing steps:
+
+1. Understand the problems
+2. Draw a figure for the data structure and work through some examples
+3. Code recursively
+
+3 How to design programs:  from  &laquo;How to design programs&raquo; at <a href = 'http://htdp.org/2018-01-06/Book/'> here </a>
+
+1. From problem analysis to data definitions
+2. Write function documentations: signature, purpose statement, header
+3. Functional examples
+4. Function templates
+5. Function definition
+6. Testing
 
